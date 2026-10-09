@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="color-scheme" content="light">
+    <meta name="color-scheme" content="only light">
+    <meta name="supported-color-schemes" content="light">
     <title>برنامه‌ریز مطالعه نازنین | کنکور ۱۴۰۶</title>
     <!-- Vazirmatn Font & Chart.js -->
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
@@ -23,14 +24,14 @@
         }
 
         * { box-sizing: border-box; font-family: 'Vazirmatn', sans-serif; transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); }
-        body { background: var(--bg-grad); color: var(--text-dark); margin: 0; padding: 20px 12px; min-height: 100vh; }
+        body { background: var(--bg-grad); color: var(--text-dark); margin: 0; padding: 15px 10px; min-height: 100vh; }
         
-        .container { max-width: 1150px; margin: 0 auto; }
+        .container { max-width: 1150px; margin: 0 auto; width: 100%; }
         
         /* Luxury Header */
         header {
-            background: var(--card-bg); border-radius: 24px; padding: 20px 25px;
-            box-shadow: var(--shadow-luxury); text-align: center; margin-bottom: 25px;
+            background: var(--card-bg); border-radius: 22px; padding: 18px 20px;
+            box-shadow: var(--shadow-luxury); text-align: center; margin-bottom: 22px;
             border: 1px solid var(--border-soft); position: relative; overflow: hidden;
         }
         header::before {
@@ -44,8 +45,8 @@
             display: flex; align-items: center; justify-content: center; gap: 8px;
             white-space: nowrap;
         }
-        .header-flower { font-size: 1.8rem; filter: drop-shadow(0 4px 8px rgba(236, 64, 122, 0.3)); }
-        header p { margin: 0; color: var(--text-muted); font-size: 0.9rem; font-weight: 600; }
+        .header-flower { font-size: 1.5rem; filter: drop-shadow(0 4px 8px rgba(236, 64, 122, 0.3)); }
+        header p { margin: 0; color: var(--text-muted); font-size: 0.88rem; font-weight: 600; }
 
         /* Motivational Feedback Banner */
         .feedback-banner {
@@ -59,7 +60,7 @@
         .feedback-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
         .feedback-title { font-size: 1.15rem; font-weight: 800; color: #880E4F; display: flex; align-items: center; gap: 8px; }
         .feedback-body { font-size: 0.98rem; font-weight: 600; line-height: 1.7; color: #4A148C; }
-        .close-banner { background: none; border: none; font-size: 1.2rem; color: #AD1457; cursor: pointer; font-weight: bold; }
+        .close-banner { background: none; border: none; font-size: 1.3rem; color: #AD1457; cursor: pointer; font-weight: bold; }
 
         /* Step 1: Input Form Container */
         .input-card {
@@ -73,34 +74,27 @@
         }
         .card-header h2 { color: #880E4F; margin: 0; font-size: 1.25rem; display: flex; align-items: center; gap: 8px; }
         
-        /* Date Selection Row - Guaranteed No Truncation on Mobile */
+        /* Date Selection Row */
         .date-select-box {
             background: linear-gradient(135deg, #FCE4EC, #F3E5F5); padding: 14px 16px;
-            border-radius: 18px; margin-bottom: 20px; border: 1.5px solid #F8BBD0;
-            display: flex; flex-direction: column; gap: 10px;
+            border-radius: 18px; margin-bottom: 20px; display: flex; align-items: center;
+            gap: 10px; border: 1.5px solid #F8BBD0; flex-wrap: nowrap;
         }
-        @media (min-width: 520px) {
-            .date-select-box { flex-direction: row; align-items: center; justify-content: space-between; }
-        }
-        .date-select-box label { font-weight: 800; color: #880E4F; font-size: 0.95rem; white-space: nowrap; }
-        .dropdown-group { display: flex; gap: 8px; width: 100%; min-width: 0; flex-wrap: nowrap; }
+        .date-select-box label { font-weight: 800; color: #880E4F; font-size: 0.92rem; white-space: nowrap; }
+        .dropdown-group { display: flex; gap: 8px; flex: 1; flex-wrap: nowrap; min-width: 0; }
         
         .luxury-select {
-            padding: 9px 6px; border-radius: 12px;
-            border: 1.5px solid #AB47BC; background: white; font-size: 0.9rem;
+            flex: 1; min-width: 0; padding: 9px 8px; border-radius: 12px;
+            border: 1.5px solid #AB47BC; background: white; font-size: 0.88rem;
             font-weight: 700; color: #4A148C; outline: none; cursor: pointer;
-            text-align: center; text-align-last: center;
-            -webkit-appearance: auto; appearance: auto;
+            text-align: center;
         }
-        #daySelect { flex: 1; min-width: 65px; }
-        #monthSelect { flex: 2.2; min-width: 125px; }
-        #yearSelect { flex: 1.2; min-width: 80px; }
         .luxury-select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(216, 27, 96, 0.15); }
 
-        /* Subjects Grid - 5 Separate Clean Cards with Side-by-Side Inputs */
+        /* Subjects Grid - 5 Separate Clean Cards */
         .subjects-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 14px; margin-bottom: 20px;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 12px; margin-bottom: 20px;
         }
         .subject-card {
             background: #FAFAFA; border-radius: 18px; padding: 14px;
@@ -109,23 +103,20 @@
         }
         .subject-card:hover { border-color: var(--primary-light); background: #FFF; transform: translateY(-2px); }
         .subject-title {
-            font-size: 0.95rem; font-weight: 800; color: #6A1B9A;
-            display: flex; align-items: center; gap: 6px;
-            border-bottom: 1px solid #F8BBD0; padding-bottom: 6px;
+            font-size: 0.92rem; font-weight: 800; color: #6A1B9A;
+            display: flex; align-items: center; gap: 5px;
+            border-bottom: 1px solid #F8BBD0; padding-bottom: 5px;
         }
-        
-        /* Side-by-Side Inputs for Hours and Tests */
-        .subject-inputs-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
         .input-pair { display: flex; flex-direction: column; gap: 3px; }
         .input-pair label { font-size: 0.78rem; font-weight: 700; color: #7B1FA2; }
         .input-wrapper { display: flex; align-items: center; background: white; border: 1.5px solid #E1BEE7; border-radius: 10px; overflow: hidden; }
         .input-wrapper:focus-within { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(216, 27, 96, 0.15); }
         .input-wrapper input {
-            width: 100%; border: none; outline: none; padding: 6px 4px; font-size: 0.88rem;
+            width: 100%; border: none; outline: none; padding: 7px 8px; font-size: 0.9rem;
             font-weight: 800; color: #4A148C; text-align: center; background: transparent;
         }
         .input-wrapper .unit-tag {
-            background: #F3E5F5; color: #6A1B9A; padding: 6px 6px; font-size: 0.72rem;
+            background: #F3E5F5; color: #6A1B9A; padding: 7px 8px; font-size: 0.75rem;
             font-weight: 800; border-right: 1px solid #E1BEE7; white-space: nowrap;
         }
 
@@ -147,16 +138,19 @@
         }
         .btn-submit:hover { background-position: right center; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(216, 27, 96, 0.35); }
 
-        /* Icon Navigation Tabs - Guaranteed Wrapping for ALL 5 Icons on Mobile */
+        /* Icon Navigation Tabs (Fixed Mobile Overflow) */
         .nav-tabs {
             display: flex; gap: 8px; margin-bottom: 22px;
-            flex-wrap: wrap; justify-content: center; max-width: 100%;
+            overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 6px;
+            justify-content: flex-start; max-width: 100%; scrollbar-width: none;
         }
+        .nav-tabs::-webkit-scrollbar { display: none; }
+        
         .tab-btn {
-            background: white; border: 2px solid #F8BBD0; padding: 9px 13px; border-radius: 14px;
+            background: white; border: 2px solid #F8BBD0; padding: 9px 15px; border-radius: 14px;
             color: #6A1B9A; font-weight: 800; font-size: 0.85rem; cursor: pointer;
-            display: flex; align-items: center; justify-content: center; gap: 6px;
-            box-shadow: var(--shadow-luxury); flex: 1 1 auto; text-align: center; white-space: nowrap;
+            display: flex; align-items: center; gap: 6px; box-shadow: var(--shadow-luxury);
+            flex-shrink: 0; white-space: nowrap;
         }
         .tab-btn.active, .tab-btn:hover {
             background: linear-gradient(45deg, #EC407A, #AB47BC); color: white; border-color: transparent;
@@ -174,24 +168,26 @@
         }
         .filter-btn-group { display: flex; gap: 6px; flex-wrap: wrap; }
         .filter-btn {
-            background: #FAF5FB; border: 1.5px solid #E1BEE7; padding: 6px 12px; border-radius: 10px;
-            font-size: 0.8rem; font-weight: 700; color: #6A1B9A; cursor: pointer;
+            background: #F3E5F5; border: 1px solid #CE93D8; color: #6A1B9A; padding: 5px 12px;
+            border-radius: 10px; font-size: 0.78rem; font-weight: 700; cursor: pointer;
         }
-        .filter-btn.active, .filter-btn:hover { background: #EC407A; color: white; border-color: #EC407A; }
+        .filter-btn.active, .filter-btn:hover { background: var(--primary); color: white; border-color: var(--primary); }
 
+        /* Scrollable Chart Wrapper for Large Date Ranges */
         .chart-scroll-wrapper {
-            width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 10px;
+            width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch;
+            border-radius: 14px; padding-bottom: 8px; scrollbar-width: thin;
         }
-        .chart-inner-container { min-width: 100%; height: 260px; position: relative; }
+        .chart-inner-container { position: relative; height: 280px; min-width: 100%; }
 
         /* KPI Cards */
         .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 25px; }
         .kpi-card {
-            background: linear-gradient(135deg, #FFF0F5, #F3E5F5); border-radius: 20px; padding: 18px;
-            text-align: center; border-right: 5px solid var(--primary); box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            background: linear-gradient(135deg, #FFF0F5, #F3E5F5); border-radius: 18px; padding: 16px;
+            text-align: center; border-right: 4px solid var(--primary); box-shadow: 0 4px 15px rgba(0,0,0,0.02);
         }
-        .kpi-card h3 { margin: 0 0 6px 0; font-size: 0.85rem; color: #880E4F; font-weight: 800; }
-        .kpi-card .val { font-size: 1.6rem; font-weight: 900; color: var(--primary); }
+        .kpi-card h3 { margin: 0 0 5px 0; font-size: 0.82rem; color: #880E4F; font-weight: 800; }
+        .kpi-card .val { font-size: 1.55rem; font-weight: 900; color: var(--primary); }
 
         /* Progress Bars */
         .prog-item { margin-bottom: 16px; }
@@ -199,40 +195,55 @@
         .bar-bg { background: #E1BEE7; height: 14px; border-radius: 8px; overflow: hidden; padding: 2px; }
         .bar-fill { background: linear-gradient(90deg, #EC407A, #AB47BC, #D4AF37); height: 100%; width: 0%; border-radius: 6px; }
 
-        /* Table */
-        table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
-        th, td { padding: 10px 12px; text-align: center; border-bottom: 1px solid #F3E5F5; font-weight: 600; }
-        th { background: #F8BBD0; color: #880E4F; font-weight: 800; border-radius: 6px; }
-        tr:nth-child(even) { background: #FAF5FB; }
-        tr:hover { background: #F3E5F5; }
-
-        /* Maze Cards Grid - Perfectly Constrained for Mobile */
+        /* Maze Cards Grid */
         .maze-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 15px; }
         .maze-card {
             background: #FAFAFA; border-radius: 18px; padding: 16px; border: 1.5px solid #F3E5F5;
-            display: flex; flex-direction: column; gap: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            display: flex; flex-direction: column; gap: 10px;
         }
         .maze-card-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed #E1BEE7; padding-bottom: 8px; }
         .maze-title { font-weight: 800; color: #880E4F; font-size: 0.92rem; }
         .maze-date { font-size: 0.8rem; font-weight: 700; color: #7B1FA2; background: #F3E5F5; padding: 3px 8px; border-radius: 8px; }
         .maze-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-        
-        .maze-pct-section {
-            background: white; border: 1px solid #E1BEE7; border-radius: 12px; padding: 8px 10px;
-        }
-        .maze-pct-title { font-size: 0.78rem; font-weight: 800; color: #6A1B9A; margin-bottom: 6px; text-align: center; }
-        .maze-pct-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; width: 100%; }
-        .maze-pct-box { display: flex; flex-direction: column; text-align: center; min-width: 0; }
-        .maze-pct-box label { font-size: 0.68rem; font-weight: 800; color: #6A1B9A; margin-bottom: 2px; }
-        .maze-pct-box input {
-            width: 100%; min-width: 0; padding: 5px 2px; font-size: 0.8rem; text-align: center;
-            border: 1px solid #E1BEE7; border-radius: 6px; font-weight: 800; color: #4A148C; background: #FAF5FB;
-            outline: none;
-        }
-        .maze-pct-box input:focus { border-color: var(--primary); background: #FFF; }
+        .maze-pct-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; }
+        .maze-pct-box { display: flex; flex-direction: column; text-align: center; }
+        .maze-pct-box label { font-size: 0.68rem; font-weight: 700; color: #6A1B9A; margin-bottom: 2px; }
+        .maze-pct-box input { padding: 4px; font-size: 0.78rem; text-align: center; border: 1px solid #E1BEE7; border-radius: 6px; font-weight: 700; }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes popIn { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
+        /* Table */
+        table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        th, td { padding: 10px 12px; text-align: center; border-bottom: 1px solid #F3E5F5; font-weight: 600; }
+        th { background: #F8BBD0; color: #880E4F; font-weight: 800; border-radius: 6px; }
+        tr:nth-child(even) { background: #FAF5FB; }
+        tr:hover { background: #F3E5F5; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes popIn { from { opacity: 0; transform: scale(0.94); } to { opacity: 1; transform: scale(1); } }
+    
+        :root {
+            color-scheme: light only !important;
+            supported-color-schemes: light !important;
+        }
+        html, body {
+            background: #FFF0F6 !important;
+            background-image: radial-gradient(circle at top right, #FFF0F6 0%, #F5E6F8 50%, #EDF2FF 100%) !important;
+            color: #3A0B35 !important;
+        }
+        select, input, textarea, option {
+            color: #4A148C !important;
+            background-color: #FFFFFF !important;
+        }
+        .luxury-select {
+            color: #4A148C !important;
+            background: #FFFFFF !important;
+        }
+        .date-select-box {
+            background: #FCE4EC !important;
+        }
+        header, .input-card, .tab-content, .subject-card, .kpi-card, .maze-card {
+            background-color: #FFFFFF !important;
+        }
+
     </style>
 </head>
 <body>
@@ -260,7 +271,7 @@
     <!-- STEP 1: Luxury Input Form -->
     <div class="input-card">
         <div class="card-header">
-            <h2>🌸 ثبت مطالعه روزانه نازنین</h2>
+            <h2>✏️ ثبت و ویرایش مطالعه روزانه</h2>
         </div>
 
         <form id="studyForm">
@@ -279,20 +290,18 @@
                 <!-- Bio -->
                 <div class="subject-card">
                     <div class="subject-title">🧬 زیست‌شناسی</div>
-                    <div class="subject-inputs-row">
-                        <div class="input-pair">
-                            <label>ساعت مطالعه</label>
-                            <div class="input-wrapper">
-                                <input type="number" id="bioHrs" min="0" max="16" step="0.5" value="3.0">
-                                <span class="unit-tag">ساعت</span>
-                            </div>
+                    <div class="input-pair">
+                        <label>ساعت مطالعه</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="bioHrs" min="0" max="16" step="0.5" value="3.0">
+                            <span class="unit-tag">ساعت</span>
                         </div>
-                        <div class="input-pair">
-                            <label>تعداد تست</label>
-                            <div class="input-wrapper">
-                                <input type="number" id="bioTst" min="0" max="500" step="1" value="40">
-                                <span class="unit-tag">تست</span>
-                            </div>
+                    </div>
+                    <div class="input-pair">
+                        <label>تعداد تست</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="bioTst" min="0" max="500" step="1" value="40">
+                            <span class="unit-tag">تست</span>
                         </div>
                     </div>
                 </div>
@@ -300,20 +309,18 @@
                 <!-- Chem -->
                 <div class="subject-card">
                     <div class="subject-title">🧪 شیمی</div>
-                    <div class="subject-inputs-row">
-                        <div class="input-pair">
-                            <label>ساعت مطالعه</label>
-                            <div class="input-wrapper">
-                                <input type="number" id="chemHrs" min="0" max="16" step="0.5" value="2.0">
-                                <span class="unit-tag">ساعت</span>
-                            </div>
+                    <div class="input-pair">
+                        <label>ساعت مطالعه</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="chemHrs" min="0" max="16" step="0.5" value="2.0">
+                            <span class="unit-tag">ساعت</span>
                         </div>
-                        <div class="input-pair">
-                            <label>تعداد تست</label>
-                            <div class="input-wrapper">
-                                <input type="number" id="chemTst" min="0" max="500" step="1" value="25">
-                                <span class="unit-tag">تست</span>
-                            </div>
+                    </div>
+                    <div class="input-pair">
+                        <label>تعداد تست</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="chemTst" min="0" max="500" step="1" value="25">
+                            <span class="unit-tag">تست</span>
                         </div>
                     </div>
                 </div>
@@ -321,20 +328,18 @@
                 <!-- Phys -->
                 <div class="subject-card">
                     <div class="subject-title">⚛️ فیزیک</div>
-                    <div class="subject-inputs-row">
-                        <div class="input-pair">
-                            <label>ساعت مطالعه</label>
-                            <div class="input-wrapper">
-                                <input type="number" id="phyHrs" min="0" max="16" step="0.5" value="1.5">
-                                <span class="unit-tag">ساعت</span>
-                            </div>
+                    <div class="input-pair">
+                        <label>ساعت مطالعه</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="phyHrs" min="0" max="16" step="0.5" value="1.5">
+                            <span class="unit-tag">ساعت</span>
                         </div>
-                        <div class="input-pair">
-                            <label>تعداد تست</label>
-                            <div class="input-wrapper">
-                                <input type="number" id="phyTst" min="0" max="500" step="1" value="20">
-                                <span class="unit-tag">تست</span>
-                            </div>
+                    </div>
+                    <div class="input-pair">
+                        <label>تعداد تست</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="phyTst" min="0" max="500" step="1" value="20">
+                            <span class="unit-tag">تست</span>
                         </div>
                     </div>
                 </div>
@@ -342,20 +347,18 @@
                 <!-- Math -->
                 <div class="subject-card">
                     <div class="subject-title">📐 ریاضیات</div>
-                    <div class="subject-inputs-row">
-                        <div class="input-pair">
-                            <label>ساعت مطالعه</label>
-                            <div class="input-wrapper">
-                                <input type="number" id="mathHrs" min="0" max="16" step="0.5" value="1.5">
-                                <span class="unit-tag">ساعت</span>
-                            </div>
+                    <div class="input-pair">
+                        <label>ساعت مطالعه</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="mathHrs" min="0" max="16" step="0.5" value="1.5">
+                            <span class="unit-tag">ساعت</span>
                         </div>
-                        <div class="input-pair">
-                            <label>تعداد تست</label>
-                            <div class="input-wrapper">
-                                <input type="number" id="mathTst" min="0" max="500" step="1" value="20">
-                                <span class="unit-tag">تست</span>
-                            </div>
+                    </div>
+                    <div class="input-pair">
+                        <label>تعداد تست</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="mathTst" min="0" max="500" step="1" value="20">
+                            <span class="unit-tag">تست</span>
                         </div>
                     </div>
                 </div>
@@ -363,20 +366,18 @@
                 <!-- Geo -->
                 <div class="subject-card">
                     <div class="subject-title">🌍 زمین‌شناسی</div>
-                    <div class="subject-inputs-row">
-                        <div class="input-pair">
-                            <label>ساعت مطالعه</label>
-                            <div class="input-wrapper">
-                                <input type="number" id="geoHrs" min="0" max="16" step="0.5" value="0.0">
-                                <span class="unit-tag">ساعت</span>
-                            </div>
+                    <div class="input-pair">
+                        <label>ساعت مطالعه</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="geoHrs" min="0" max="16" step="0.5" value="0.0">
+                            <span class="unit-tag">ساعت</span>
                         </div>
-                        <div class="input-pair">
-                            <label>تعداد تست</label>
-                            <div class="input-wrapper">
-                                <input type="number" id="geoTst" min="0" max="500" step="1" value="0">
-                                <span class="unit-tag">تست</span>
-                            </div>
+                    </div>
+                    <div class="input-pair">
+                        <label>تعداد تست</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="geoTst" min="0" max="500" step="1" value="0">
+                            <span class="unit-tag">تست</span>
                         </div>
                     </div>
                 </div>
@@ -394,7 +395,7 @@
         </form>
     </div>
 
-    <!-- STEP 2: Icon Navigation Tabs - Guaranteed All 5 Icons visible -->
+    <!-- STEP 2: Icon Navigation Tabs (Mobile Overflow Fixed) -->
     <div class="nav-tabs">
         <button class="tab-btn active" onclick="switchTab('chartsTab', this)">📊 روند و نمودارها</button>
         <button class="tab-btn" onclick="switchTab('targetsTab', this)">🎯 تارگت‌ها و پیشرفت</button>
@@ -403,35 +404,35 @@
         <button class="tab-btn" onclick="switchTab('mazeTab', this)">🧪 آزمون‌های ماز</button>
     </div>
 
-    <!-- TAB 1: CHARTS -->
+    <!-- TAB 1: CHARTS (With Horizontal Scroll & Filter Buttons) -->
     <div id="chartsTab" class="tab-content active">
         <div class="chart-controls">
-            <h3 style="color:#880E4F; margin:0;">📈 روند ساعات مطالعه روزانه</h3>
+            <h3 style="color:#880E4F; margin:0;">📈 نمودار روند ساعات مطالعه روزانه</h3>
             <div class="filter-btn-group">
-                <button type="button" class="filter-btn active" onclick="filterChartRange(7, this)">۷ روز اخیر</button>
-                <button type="button" class="filter-btn" onclick="filterChartRange(14, this)">۱۴ روز اخیر</button>
-                <button type="button" class="filter-btn" onclick="filterChartRange(30, this)">۳۰ روز اخیر</button>
-                <button type="button" class="filter-btn" onclick="filterChartRange(0, this)">کل روزها</button>
+                <button class="filter-btn" onclick="setChartRange(7, this)">۷ روز اخیر</button>
+                <button class="filter-btn" onclick="setChartRange(14, this)">۱۴ روز اخیر</button>
+                <button class="filter-btn" onclick="setChartRange(30, this)">۳۰ روز اخیر</button>
+                <button class="filter-btn active" onclick="setChartRange('all', this)">کل روزها (اسکرول)</button>
             </div>
         </div>
 
-        <div class="chart-scroll-wrapper">
-            <div id="lineChartInner" class="chart-inner-container">
+        <div class="chart-scroll-wrapper" id="lineChartScrollWrapper">
+            <div id="lineChartContainer" class="chart-inner-container">
                 <canvas id="dailyLineChart"></canvas>
             </div>
         </div>
 
         <!-- 2 SEPARATE BAR CHARTS -->
-        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:20px; margin-top:25px;">
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:22px; margin-top:25px;">
             <div>
                 <h3 style="color:#880E4F; margin-top:0;">⏱️ مجموع ساعات مطالعه به تفکیک درس</h3>
-                <div style="position:relative; height:220px;">
+                <div style="position:relative; height:230px;">
                     <canvas id="subjectHoursBarChart"></canvas>
                 </div>
             </div>
             <div>
                 <h3 style="color:#880E4F; margin-top:0;">🎯 مجموع تست‌های زده‌شده به تفکیک درس</h3>
-                <div style="position:relative; height:220px;">
+                <div style="position:relative; height:230px;">
                     <canvas id="subjectTestsBarChart"></canvas>
                 </div>
             </div>
@@ -447,7 +448,7 @@
             <div class="kpi-card"><h3>درصد تحقق تارگت کل</h3><div class="val" id="totalProgPct">۰%</div></div>
         </div>
 
-        <h3 style="color:#880E4F; margin-bottom:18px;">🎯 میزان پیشرفت ساعات مطالعه به تفکیک دروس</h3>
+        <h3 style="color:#880E4F; margin-bottom:16px;">🎯 میزان پیشرفت ساعات مطالعه به تفکیک دروس</h3>
         <div id="subjectProgressList"></div>
     </div>
 
@@ -483,30 +484,28 @@
 
     <!-- TAB 5: MAZE EXAMS DATABASE -->
     <div id="mazeTab" class="tab-content">
-        <h2 style="color:#880E4F; margin-top:0; border-bottom:2px dashed #F8BBD0; padding-bottom:10px;">🧪 بانک داده و کارنامه آزمون‌های ماز کنکور ۱۴۰۶</h2>
-        <p style="color:#7B1FA2; font-weight:600; margin-bottom:20px;">ثبت رتبه، تراز و درصد هر درس برای ۱۸ مرحله آزمون ماز (از ۱۷ مهر ۱۴۰۵ تا ۴ تیر ۱۴۰۶)</p>
-        
-        <div class="kpi-grid" style="margin-bottom:25px;">
-            <div class="kpi-card"><h3>تعداد آزمون‌های ثبت‌شده</h3><div class="val" id="mazeLoggedCount">۰ از ۱۸</div></div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; flex-wrap:wrap; gap:10px;">
+            <h3 style="color:#880E4F; margin:0;">🧪 بانک داده و کارنامه ۱۸ مرحله آزمون ماز (۱۴۰۶-۱۴۰۵)</h3>
+            <span style="font-size:0.85rem; color:#7B1FA2; font-weight:700;">از ۱۷ مهر ۱۴۰۵ تا ۴ تیر ۱۴۰۶</span>
         </div>
 
-        <h3 style="color:#880E4F; margin-top:10px;">📈 نمودار روند تغییرات تراز در آزمون‌های ماز</h3>
-        <div style="position:relative; height:240px; margin-bottom:30px;">
+        <div style="position:relative; height:220px; margin-bottom:25px;">
             <canvas id="mazeTrazChart"></canvas>
         </div>
 
-        <h3 style="color:#880E4F; margin-bottom:15px;">📝 ثبت و ویرایش کارنامه آزمون‌ها به تفکیک تاریخ</h3>
         <div id="mazeGridContainer" class="maze-grid"></div>
     </div>
 </div>
 
 <script>
+    // Convert All Numbers to Persian Digits
     function toPersianDigits(num) {
         if (num === null || num === undefined) return '';
         const persianDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
         return num.toString().replace(/\d/g, x => persianDigits[parseInt(x)]);
     }
 
+    // Format number with Persian digits and commas
     function formatNumFa(num, isFloat = false) {
         if (num === null || num === undefined || isNaN(num)) return toPersianDigits('۰');
         let valStr = isFloat ? num.toFixed(1) : Math.round(num).toString();
@@ -523,6 +522,28 @@
     ];
 
     const YEARS = [1405, 1406];
+
+    // 18 Maze Exams Schedule
+    const MAZE_EXAMS_LIST = [
+        { id: 1, title: 'آزمون ۱ ماز', date: '1405/07/17' },
+        { id: 2, title: 'آزمون ۲ ماز', date: '1405/08/01' },
+        { id: 3, title: 'آزمون ۳ ماز', date: '1405/08/15' },
+        { id: 4, title: 'آزمون ۴ ماز', date: '1405/08/29' },
+        { id: 5, title: 'آزمون ۵ ماز (جمع‌بندی دهم)', date: '1405/09/13' },
+        { id: 6, title: 'آزمون ۶ ماز', date: '1405/09/27' },
+        { id: 7, title: 'آزمون ۷ ماز (جمع‌بندی نیم‌سال اول ۱۲)', date: '1405/10/25' },
+        { id: 8, title: 'آزمون ۸ ماز', date: '1405/11/09' },
+        { id: 9, title: 'آزمون ۹ ماز', date: '1405/11/23' },
+        { id: 10, title: 'آزمون ۱۰ ماز', date: '1405/12/07' },
+        { id: 11, title: 'آزمون ۱۱ ماز (جمع‌بندی یازدهم)', date: '1405/12/21' },
+        { id: 12, title: 'آزمون ۱۲ ماز (مرور دهم و یازدهم)', date: '1406/01/06' },
+        { id: 13, title: 'آزمون ۱۳ ماز (مرور نیم‌سال اول ۱۲)', date: '1406/01/20' },
+        { id: 14, title: 'آزمون ۱۴ ماز', date: '1406/02/03' },
+        { id: 15, title: 'آزمون ۱۵ ماز (مرور نیم‌سال دوم ۱۲)', date: '1406/02/24' },
+        { id: 16, title: 'آزمون ۱۶ ماز (جامع ۱)', date: '1406/03/21' },
+        { id: 17, title: 'آزمون ۱۷ ماز (جامع ۲)', date: '1406/03/28' },
+        { id: 18, title: 'آزمون ۱۸ ماز (جامع نهایی کنکور)', date: '1406/04/04' }
+    ];
 
     const FEEDBACK_MESSAGES = {
         below8: [
@@ -555,35 +576,14 @@
         'زمین': { targetHrs: 90, pct: 4 }
     };
 
-    const MAZE_EXAMS_LIST = [
-        { id: 1, title: 'آزمون ۱ ماز', date: '1405/07/17' },
-        { id: 2, title: 'آزمون ۲ ماز', date: '1405/08/01' },
-        { id: 3, title: 'آزمون ۳ ماز', date: '1405/08/15' },
-        { id: 4, title: 'آزمون ۴ ماز', date: '1405/08/29' },
-        { id: 5, title: 'آزمون ۵ ماز (جمع‌بندی دهم)', date: '1405/09/13' },
-        { id: 6, title: 'آزمون ۶ ماز', date: '1405/09/27' },
-        { id: 7, title: 'آزمون ۷ ماز (جمع‌بندی نیم‌سال اول ۱۲)', date: '1405/10/25' },
-        { id: 8, title: 'آزمون ۸ ماز', date: '1405/11/09' },
-        { id: 9, title: 'آزمون ۹ ماز', date: '1405/11/23' },
-        { id: 10, title: 'آزمون ۱۰ ماز', date: '1405/12/07' },
-        { id: 11, title: 'آزمون ۱۱ ماز (جمع‌بندی یازدهم)', date: '1405/12/21' },
-        { id: 12, title: 'آزمون ۱۲ ماز (مرور دهم و یازدهم)', date: '1406/01/06' },
-        { id: 13, title: 'آزمون ۱۳ ماز (مرور نیم‌سال اول ۱۲)', date: '1406/01/20' },
-        { id: 14, title: 'آزمون ۱۴ ماز', date: '1406/02/03' },
-        { id: 15, title: 'آزمون ۱۵ ماز (مرور نیم‌سال دوم ۱۲)', date: '1406/02/24' },
-        { id: 16, title: 'آزمون ۱۶ ماز (جامع ۱)', date: '1406/03/21' },
-        { id: 17, title: 'آزمون ۱۷ ماز (جامع ۲)', date: '1406/03/28' },
-        { id: 18, title: 'آزمون ۱۸ ماز (جامع نهایی کنکور)', date: '1406/04/04' }
-    ];
-
-    let studyMap = JSON.parse(localStorage.getItem('nazanin_study_map_v3')) || {
+    let studyMap = JSON.parse(localStorage.getItem('nazanin_study_map_v4')) || {
         '1405/07/18': { date: '1405/07/18', bioH: 3.0, bioT: 40, chemH: 2.0, chemT: 25, phyH: 1.5, phyT: 20, mathH: 1.5, mathT: 20, geoH: 0.0, geoT: 0, notes: 'روز اول - شروع عالی و پرقدرت' }
     };
 
     let mazeData = JSON.parse(localStorage.getItem('nazanin_maze_map_v1')) || {};
 
-    let currentChartDays = 7;
     let lineChart, barHoursChart, barTestsChart, mazeChart;
+    let currentChartRange = 'all';
 
     function initDateDropdowns() {
         const yearSel = document.getElementById('yearSelect');
@@ -742,7 +742,8 @@
     }
 
     function saveAndRender() {
-        localStorage.setItem('nazanin_study_map_v3', JSON.stringify(studyMap));
+        localStorage.setItem('nazanin_study_map_v4', JSON.stringify(studyMap));
+        localStorage.setItem('nazanin_maze_map_v1', JSON.stringify(mazeData));
         renderKPIs();
         renderProgressBars();
         renderTable();
@@ -757,16 +758,6 @@
         document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
         document.getElementById(tabId).classList.add('active');
         btn.classList.add('active');
-        if (tabId === 'mazeTab') {
-            renderMazeChart();
-        }
-    }
-
-    function filterChartRange(days, btn) {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        currentChartDays = days;
-        renderCharts();
     }
 
     function deleteEntry(dateKey) {
@@ -843,22 +834,32 @@
         });
     }
 
+    function setChartRange(range, btn) {
+        currentChartRange = range;
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        if (btn) btn.classList.add('active');
+        renderCharts();
+    }
+
     function renderCharts() {
         let sorted = getSortedEntries();
         
-        let filtered = sorted;
-        if (currentChartDays > 0 && sorted.length > currentChartDays) {
-            filtered = sorted.slice(-currentChartDays);
+        // Filter range
+        let displayList = sorted;
+        if (currentChartRange !== 'all' && typeof currentChartRange === 'number') {
+            displayList = sorted.slice(-currentChartRange);
         }
 
-        let datesFa = filtered.map(d => toPersianDigits(d.date));
-        let dailyTotals = filtered.map(d => d.bioH + d.chemH + d.phyH + d.mathH + d.geoH);
+        let datesFa = displayList.map(d => toPersianDigits(d.date));
+        let dailyTotals = displayList.map(d => d.bioH + d.chemH + d.phyH + d.mathH + d.geoH);
 
-        const innerCont = document.getElementById('lineChartInner');
-        if (currentChartDays === 0 && datesFa.length > 8) {
-            innerCont.style.width = (datesFa.length * 45) + 'px';
+        // Adjust Container Width for Scrollability when 'all' is selected
+        const container = document.getElementById('lineChartContainer');
+        if (currentChartRange === 'all' && displayList.length > 10) {
+            let calculatedWidth = Math.max(container.parentElement.clientWidth, displayList.length * 42);
+            container.style.width = calculatedWidth + 'px';
         } else {
-            innerCont.style.width = '100%';
+            container.style.width = '100%';
         }
 
         let subjectHrs = { 'زیست': 0, 'شیمی': 0, 'فیزیک': 0, 'ریاضی': 0, 'زمین': 0 };
@@ -872,11 +873,11 @@
             subjectTests['فیزیک'] += d.phyT; subjectTests['ریاضی'] += d.mathT; subjectTests['زمین'] += d.geoT;
         });
 
-        try {
-            if(lineChart) lineChart.destroy();
-            if(barHoursChart) barHoursChart.destroy();
-            if(barTestsChart) barTestsChart.destroy();
+        if(lineChart) lineChart.destroy();
+        if(barHoursChart) barHoursChart.destroy();
+        if(barTestsChart) barTestsChart.destroy();
 
+        try {
             lineChart = new Chart(document.getElementById('dailyLineChart'), {
                 type: 'line',
                 data: {
@@ -888,6 +889,10 @@
                 },
                 options: { responsive: true, maintainAspectRatio: false }
             });
+
+            // Scroll to end of chart wrapper for recent days
+            const wrapper = document.getElementById('lineChartScrollWrapper');
+            if (wrapper) wrapper.scrollLeft = 99999;
 
             barHoursChart = new Chart(document.getElementById('subjectHoursBarChart'), {
                 type: 'bar',
@@ -941,65 +946,58 @@
     // MAZE EXAMS RENDER & INPUT HANDLER
     function renderMazeGrid() {
         const container = document.getElementById('mazeGridContainer');
+        if (!container) return;
         container.innerHTML = '';
-        
-        let loggedCount = 0;
 
         MAZE_EXAMS_LIST.forEach(exam => {
             const exData = mazeData[exam.id] || { traz: '', rank: '', bioP: '', chemP: '', phyP: '', mathP: '', geoP: '' };
-            if (exData.traz || exData.rank) loggedCount++;
-
-            const card = document.createElement('div');
+            
+            let card = document.createElement('div');
             card.className = 'maze-card';
             card.innerHTML = `
                 <div class="maze-card-header">
-                    <span class="maze-title">🧪 ${exam.title}</span>
-                    <span class="maze-date">📅 ${toPersianDigits(exam.date)}</span>
+                    <span class="maze-title">${exam.title}</span>
+                    <span class="maze-date">${toPersianDigits(exam.date)}</span>
                 </div>
                 <div class="maze-inputs">
                     <div class="input-pair">
                         <label>تراز کل</label>
                         <div class="input-wrapper">
-                            <input type="number" value="${exData.traz}" placeholder="مثلاً ۷۲۰۰" onchange="updateMazeEntry(${exam.id}, 'traz', this.value)">
+                            <input type="number" value="${exData.traz}" placeholder="مثلا ۷۲۰۰" onchange="updateMazeEntry(${exam.id}, 'traz', this.value)">
                         </div>
                     </div>
                     <div class="input-pair">
                         <label>رتبه کل</label>
                         <div class="input-wrapper">
-                            <input type="number" value="${exData.rank}" placeholder="مثلاً ۴۵۰" onchange="updateMazeEntry(${exam.id}, 'rank', this.value)">
+                            <input type="number" value="${exData.rank}" placeholder="مثلا ۴۵۰" onchange="updateMazeEntry(${exam.id}, 'rank', this.value)">
                         </div>
                     </div>
                 </div>
-                <div class="maze-pct-section">
-                    <div class="maze-pct-title">📊 درصد دروس آزمون:</div>
-                    <div class="maze-pct-grid">
-                        <div class="maze-pct-box">
-                            <label>زیست</label>
-                            <input type="number" value="${exData.bioP}" placeholder="٪" onchange="updateMazeEntry(${exam.id}, 'bioP', this.value)">
-                        </div>
-                        <div class="maze-pct-box">
-                            <label>شیمی</label>
-                            <input type="number" value="${exData.chemP}" placeholder="٪" onchange="updateMazeEntry(${exam.id}, 'chemP', this.value)">
-                        </div>
-                        <div class="maze-pct-box">
-                            <label>فیزیک</label>
-                            <input type="number" value="${exData.phyP}" placeholder="٪" onchange="updateMazeEntry(${exam.id}, 'phyP', this.value)">
-                        </div>
-                        <div class="maze-pct-box">
-                            <label>ریاضی</label>
-                            <input type="number" value="${exData.mathP}" placeholder="٪" onchange="updateMazeEntry(${exam.id}, 'mathP', this.value)">
-                        </div>
-                        <div class="maze-pct-box">
-                            <label>زمین</label>
-                            <input type="number" value="${exData.geoP}" placeholder="٪" onchange="updateMazeEntry(${exam.id}, 'geoP', this.value)">
-                        </div>
+                <div class="maze-pct-grid">
+                    <div class="maze-pct-box">
+                        <label>زیست٪</label>
+                        <input type="number" value="${exData.bioP}" placeholder="٪" onchange="updateMazeEntry(${exam.id}, 'bioP', this.value)">
+                    </div>
+                    <div class="maze-pct-box">
+                        <label>شیمی٪</label>
+                        <input type="number" value="${exData.chemP}" placeholder="٪" onchange="updateMazeEntry(${exam.id}, 'chemP', this.value)">
+                    </div>
+                    <div class="maze-pct-box">
+                        <label>فیزیک٪</label>
+                        <input type="number" value="${exData.phyP}" placeholder="٪" onchange="updateMazeEntry(${exam.id}, 'phyP', this.value)">
+                    </div>
+                    <div class="maze-pct-box">
+                        <label>ریاضی٪</label>
+                        <input type="number" value="${exData.mathP}" placeholder="٪" onchange="updateMazeEntry(${exam.id}, 'mathP', this.value)">
+                    </div>
+                    <div class="maze-pct-box">
+                        <label>زمین٪</label>
+                        <input type="number" value="${exData.geoP}" placeholder="٪" onchange="updateMazeEntry(${exam.id}, 'geoP', this.value)">
                     </div>
                 </div>
             `;
             container.appendChild(card);
         });
-
-        document.getElementById('mazeLoggedCount').innerText = `${formatNumFa(loggedCount)} از ${formatNumFa(18)}`;
     }
 
     function updateMazeEntry(examId, field, value) {
@@ -1009,7 +1007,6 @@
         mazeData[examId][field] = value;
         localStorage.setItem('nazanin_maze_map_v1', JSON.stringify(mazeData));
         renderMazeChart();
-        document.getElementById('mazeLoggedCount').innerText = `${formatNumFa(Object.values(mazeData).filter(e=>e.traz||e.rank).length)} از ${formatNumFa(18)}`;
     }
 
     function renderMazeChart() {
@@ -1019,8 +1016,9 @@
             return (entry && entry.traz) ? parseFloat(entry.traz) : null;
         });
 
+        if (mazeChart) mazeChart.destroy();
+
         try {
-            if (mazeChart) mazeChart.destroy();
             mazeChart = new Chart(document.getElementById('mazeTrazChart'), {
                 type: 'line',
                 data: {
@@ -1028,8 +1026,8 @@
                     datasets: [{
                         label: 'تراز آزمون ماز',
                         data: trazValues,
-                        borderColor: '#AB47BC',
-                        backgroundColor: 'rgba(171,71,188,0.12)',
+                        borderColor: '#8E24AA',
+                        backgroundColor: 'rgba(142,36,170,0.12)',
                         fill: true,
                         tension: 0.3,
                         borderWidth: 3,
@@ -1040,7 +1038,7 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     scales: {
-                        y: { min: 4000, max: 10000 }
+                        y: { beginAtZero: false, suggestMin: 4000, suggestMax: 10000 }
                     }
                 }
             });
