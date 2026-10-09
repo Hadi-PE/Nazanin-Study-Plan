@@ -3,226 +3,340 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light">
     <title>برنامه‌ریز مطالعه نازنین | کنکور ۱۴۰۶</title>
     <!-- Vazirmatn Font & Chart.js -->
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
-            --bg-grad: radial-gradient(circle at top right, #FFF0F6 0%, #F5E6F8 50%, #EDF2FF 100%);
+            color-scheme: light !important;
+            --bg-grad: linear-gradient(135deg, #FFF0F6 0%, #F5E6F8 50%, #EDF2FF 100%);
             --primary: #D81B60;
             --primary-light: #F48FB1;
             --secondary: #8E24AA;
             --gold: #D4AF37;
-            --card-bg: rgba(255, 255, 255, 0.96);
-            --text-dark: #3A0B35;
-            --text-muted: #7B1FA2;
-            --border-soft: rgba(216, 27, 96, 0.18);
-            --shadow-luxury: 0 12px 35px rgba(216, 27, 96, 0.09);
+            --card-bg: #FFFFFF;
+            --text-dark: #2D0C27;
+            --text-muted: #6A1B9A;
+            --border-soft: rgba(216, 27, 96, 0.2);
+            --shadow-luxury: 0 10px 30px rgba(216, 27, 96, 0.1);
         }
 
-        * { box-sizing: border-box; font-family: 'Vazirmatn', sans-serif; transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); }
-        body { background: var(--bg-grad); color: var(--text-dark); margin: 0; padding: 15px 10px; min-height: 100vh; }
-        
-        .container { max-width: 1150px; margin: 0 auto; width: 100%; }
-        
+        html, body {
+            background: #F8F0FB !important;
+            background-image: var(--bg-grad) !important;
+            color: #2D0C27 !important;
+            margin: 0;
+            padding: 20px 12px;
+            min-height: 100vh;
+            font-family: 'Vazirmatn', sans-serif !important;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        * {
+            box-sizing: border-box !important;
+            font-family: 'Vazirmatn', sans-serif !important;
+            transition: all 0.2s ease;
+        }
+
+        /* Force Inputs to Light Mode & High Contrast */
+        input, select, textarea, button {
+            color-scheme: light !important;
+            background-color: #FFFFFF !important;
+            color: #2D0C27 !important;
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; }
+
         /* Luxury Header */
         header {
-            background: var(--card-bg); border-radius: 22px; padding: 18px 20px;
-            box-shadow: var(--shadow-luxury); text-align: center; margin-bottom: 22px;
-            border: 1px solid var(--border-soft); position: relative; overflow: hidden;
+            background: #FFFFFF !important;
+            border-radius: 24px;
+            padding: 20px 25px;
+            box-shadow: var(--shadow-luxury);
+            text-align: center;
+            margin-bottom: 22px;
+            border: 1.5px solid var(--border-soft);
+            position: relative;
+            overflow: hidden;
         }
         header::before {
             content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px;
             background: linear-gradient(90deg, #EC407A, #AB47BC, #D4AF37, #EC407A);
         }
         .header-title {
-            font-size: 1.35rem; font-weight: 800; margin: 0 0 6px 0;
-            background: linear-gradient(45deg, #AD1457, #6A1B9A, #D4AF37);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            font-size: 1.4rem; font-weight: 800; margin: 0 0 6px 0;
+            color: #880E4F !important;
             display: flex; align-items: center; justify-content: center; gap: 8px;
             white-space: nowrap;
         }
-        .header-flower { font-size: 1.5rem; filter: drop-shadow(0 4px 8px rgba(236, 64, 122, 0.3)); }
-        header p { margin: 0; color: var(--text-muted); font-size: 0.88rem; font-weight: 600; }
+        .header-flower { font-size: 1.6rem; }
+        header p { margin: 0; color: #6A1B9A !important; font-size: 0.92rem; font-weight: 700; }
+
+        /* Live Sync Status Banner */
+        .sync-banner {
+            background: #E8F5E9 !important;
+            color: #1B5E20 !important;
+            padding: 12px 18px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            display: flex; align-items: center; justify-content: space-between;
+            border: 1.5px solid #A5D6A7;
+            box-shadow: 0 4px 12px rgba(46, 125, 50, 0.08);
+        }
+        .sync-btn {
+            background: #2E7D32 !important;
+            color: #FFFFFF !important;
+            border: none;
+            padding: 7px 14px;
+            border-radius: 10px;
+            font-weight: 800;
+            font-size: 0.82rem;
+            cursor: pointer;
+            display: flex; align-items: center; gap: 6px;
+        }
+        .sync-btn:hover { background: #1B5E20 !important; }
 
         /* Motivational Feedback Banner */
         .feedback-banner {
-            display: none; background: linear-gradient(135deg, #FFF, #FCE4EC);
+            display: none; background: #FFF0F5 !important;
             border-radius: 20px; padding: 18px 22px; border: 2px solid #EC407A;
-            box-shadow: 0 10px 30px rgba(236, 64, 122, 0.2); margin-bottom: 22px;
-            animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
+            box-shadow: 0 8px 25px rgba(236, 64, 122, 0.15); margin-bottom: 22px;
+            animation: popIn 0.35s ease;
         }
         .feedback-banner.show { display: block; }
-        .feedback-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
-        .feedback-title { font-size: 1.15rem; font-weight: 800; color: #880E4F; display: flex; align-items: center; gap: 8px; }
-        .feedback-body { font-size: 0.98rem; font-weight: 600; line-height: 1.7; color: #4A148C; }
-        .close-banner { background: none; border: none; font-size: 1.3rem; color: #AD1457; cursor: pointer; font-weight: bold; }
+        .feedback-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+        .feedback-title { font-size: 1.1rem; font-weight: 800; color: #880E4F !important; }
+        .feedback-body { font-size: 0.98rem; font-weight: 700; line-height: 1.6; color: #4A148C !important; }
+        .close-banner { background: none; border: none; font-size: 1.2rem; color: #AD1457; cursor: pointer; font-weight: bold; }
 
-        /* Step 1: Input Form Container */
+        /* Card Container */
         .input-card {
-            background: var(--card-bg); border-radius: 24px; padding: 22px;
-            box-shadow: var(--shadow-luxury); margin-bottom: 25px;
+            background: #FFFFFF !important;
+            border-radius: 24px;
+            padding: 22px;
+            box-shadow: var(--shadow-luxury);
+            margin-bottom: 25px;
             border: 1.5px solid var(--border-soft);
         }
         .card-header {
             display: flex; align-items: center; justify-content: space-between;
             margin-bottom: 18px; border-bottom: 2px dashed #F8BBD0; padding-bottom: 10px;
         }
-        .card-header h2 { color: #880E4F; margin: 0; font-size: 1.25rem; display: flex; align-items: center; gap: 8px; }
-        
-        /* Date Selection Row */
+        .card-header h2 { color: #880E4F !important; margin: 0; font-size: 1.25rem; font-weight: 800; }
+
+        /* Date Selection Row - Clean & Unbroken */
         .date-select-box {
-            background: linear-gradient(135deg, #FCE4EC, #F3E5F5); padding: 14px 16px;
-            border-radius: 18px; margin-bottom: 20px; display: flex; align-items: center;
-            gap: 10px; border: 1.5px solid #F8BBD0; flex-wrap: nowrap;
+            background: #FCE4EC !important;
+            padding: 14px 16px;
+            border-radius: 18px;
+            margin-bottom: 20px;
+            display: flex; align-items: center;
+            gap: 12px;
+            border: 1.5px solid #F8BBD0;
+            flex-wrap: nowrap;
         }
-        .date-select-box label { font-weight: 800; color: #880E4F; font-size: 0.92rem; white-space: nowrap; }
+        .date-select-box label { font-weight: 800; color: #880E4F !important; font-size: 0.92rem; white-space: nowrap; }
         .dropdown-group { display: flex; gap: 8px; flex: 1; flex-wrap: nowrap; min-width: 0; }
         
         .luxury-select {
-            flex: 1; min-width: 0; padding: 9px 8px; border-radius: 12px;
-            border: 1.5px solid #AB47BC; background: white; font-size: 0.88rem;
-            font-weight: 700; color: #4A148C; outline: none; cursor: pointer;
+            border: 1.5px solid #AB47BC !important;
+            border-radius: 12px;
+            padding: 9px 6px;
+            font-size: 0.88rem;
+            font-weight: 800;
+            color: #4A148C !important;
+            background: #FFFFFF !important;
+            outline: none; cursor: pointer;
             text-align: center;
         }
-        .luxury-select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(216, 27, 96, 0.15); }
+        #daySelect { flex: 1; min-width: 65px; }
+        #monthSelect { flex: 2.2; min-width: 125px; } /* WIDE ENOUGH FOR MEHR / ORDIBEHESHT */
+        #yearSelect { flex: 1.2; min-width: 75px; }
 
-        /* Subjects Grid - 5 Separate Clean Cards */
+        /* 5 Subjects Grid - Side-by-Side (Horizontal) Input Pair */
         .subjects-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-            gap: 12px; margin-bottom: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 14px;
+            margin-bottom: 20px;
         }
         .subject-card {
-            background: #FAFAFA; border-radius: 18px; padding: 14px;
-            border: 1.5px solid #F3E5F5; box-shadow: 0 4px 12px rgba(0,0,0,0.02);
-            display: flex; flex-direction: column; gap: 10px;
+            background: #FAF5FB !important;
+            border-radius: 18px;
+            padding: 14px;
+            border: 1.5px solid #F3E5F5;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
-        .subject-card:hover { border-color: var(--primary-light); background: #FFF; transform: translateY(-2px); }
+        .subject-card:hover { border-color: var(--primary-light); background: #FFFFFF !important; }
         .subject-title {
-            font-size: 0.92rem; font-weight: 800; color: #6A1B9A;
-            display: flex; align-items: center; gap: 5px;
-            border-bottom: 1px solid #F8BBD0; padding-bottom: 5px;
+            font-size: 0.95rem; font-weight: 800; color: #6A1B9A !important;
+            border-bottom: 1px solid #F8BBD0; padding-bottom: 6px;
+            display: flex; align-items: center; gap: 6px;
         }
-        .input-pair { display: flex; flex-direction: column; gap: 3px; }
-        .input-pair label { font-size: 0.78rem; font-weight: 700; color: #7B1FA2; }
-        .input-wrapper { display: flex; align-items: center; background: white; border: 1.5px solid #E1BEE7; border-radius: 10px; overflow: hidden; }
-        .input-wrapper:focus-within { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(216, 27, 96, 0.15); }
+
+        /* SIDE-BY-SIDE HOURS AND TESTS ROW */
+        .subject-inputs-row {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+        }
+        .input-pair {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            min-width: 0;
+        }
+        .input-pair label { font-size: 0.75rem; font-weight: 800; color: #880E4F !important; }
+        .input-wrapper {
+            display: flex; align-items: center;
+            background: #FFFFFF !important;
+            border: 1.5px solid #CE93D8;
+            border-radius: 10px;
+            overflow: hidden;
+        }
         .input-wrapper input {
-            width: 100%; border: none; outline: none; padding: 7px 8px; font-size: 0.9rem;
-            font-weight: 800; color: #4A148C; text-align: center; background: transparent;
+            width: 100%; border: none; outline: none; padding: 7px 4px;
+            font-size: 0.88rem; font-weight: 800; color: #4A148C !important;
+            text-align: center; background: transparent !important;
         }
         .input-wrapper .unit-tag {
-            background: #F3E5F5; color: #6A1B9A; padding: 7px 8px; font-size: 0.75rem;
-            font-weight: 800; border-right: 1px solid #E1BEE7; white-space: nowrap;
+            background: #F3E5F5 !important; color: #6A1B9A !important;
+            padding: 7px 6px; font-size: 0.72rem; font-weight: 800;
+            border-right: 1px solid #E1BEE7; white-space: nowrap;
         }
 
-        /* Description & Submit */
+        /* Notes Group */
         .notes-group { margin-bottom: 18px; }
-        .notes-group label { display: block; font-size: 0.85rem; font-weight: 800; color: #6A1B9A; margin-bottom: 5px; }
+        .notes-group label { display: block; font-size: 0.85rem; font-weight: 800; color: #6A1B9A !important; margin-bottom: 5px; }
         .notes-group input {
-            width: 100%; padding: 11px 14px; border-radius: 12px; border: 1.5px solid #E1BEE7;
-            outline: none; font-size: 0.9rem; font-weight: 600; background: #FAF5FB;
+            width: 100%; padding: 11px 14px; border-radius: 12px; border: 1.5px solid #CE93D8 !important;
+            outline: none; font-size: 0.9rem; font-weight: 700; color: #2D0C27 !important; background: #FFFFFF !important;
         }
-        .notes-group input:focus { border-color: var(--primary); background: #FFF; }
 
         .btn-submit {
-            background: linear-gradient(45deg, #EC407A, #AB47BC, #D4AF37);
-            background-size: 200% auto; color: white; border: none;
+            background: linear-gradient(45deg, #EC407A, #AB47BC, #D4AF37) !important;
+            color: #FFFFFF !important; border: none;
             padding: 14px 24px; border-radius: 16px; font-weight: 800; font-size: 1.02rem;
             cursor: pointer; width: 100%; box-shadow: 0 6px 20px rgba(216, 27, 96, 0.25);
             display: flex; align-items: center; justify-content: center; gap: 8px;
         }
-        .btn-submit:hover { background-position: right center; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(216, 27, 96, 0.35); }
 
-        /* Icon Navigation Tabs (Fixed Mobile Overflow) */
+        /* Responsive Nav Tabs Bar */
         .nav-tabs {
-            display: flex; gap: 8px; margin-bottom: 22px;
-            overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 6px;
-            justify-content: flex-start; max-width: 100%; scrollbar-width: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 22px;
         }
-        .nav-tabs::-webkit-scrollbar { display: none; }
-        
         .tab-btn {
-            background: white; border: 2px solid #F8BBD0; padding: 9px 15px; border-radius: 14px;
-            color: #6A1B9A; font-weight: 800; font-size: 0.85rem; cursor: pointer;
-            display: flex; align-items: center; gap: 6px; box-shadow: var(--shadow-luxury);
-            flex-shrink: 0; white-space: nowrap;
+            background: #FFFFFF !important;
+            border: 2px solid #F8BBD0;
+            padding: 9px 15px;
+            border-radius: 14px;
+            color: #6A1B9A !important;
+            font-weight: 800;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: flex; align-items: center; gap: 6px;
+            box-shadow: var(--shadow-luxury);
+            white-space: nowrap;
         }
         .tab-btn.active, .tab-btn:hover {
-            background: linear-gradient(45deg, #EC407A, #AB47BC); color: white; border-color: transparent;
-            transform: translateY(-2px); box-shadow: 0 6px 16px rgba(236, 64, 122, 0.3);
+            background: linear-gradient(45deg, #EC407A, #AB47BC) !important;
+            color: #FFFFFF !important;
+            border-color: transparent;
+            box-shadow: 0 6px 16px rgba(236, 64, 122, 0.3);
         }
 
-        /* Tab Contents */
-        .tab-content { display: none; background: var(--card-bg); border-radius: 24px; padding: 22px; box-shadow: var(--shadow-luxury); border: 1px solid var(--border-soft); }
-        .tab-content.active { display: block; animation: fadeIn 0.35s ease; }
-
-        /* Chart Filter Controls */
-        .chart-controls {
-            display: flex; align-items: center; justify-content: space-between; gap: 10px;
-            margin-bottom: 15px; flex-wrap: wrap;
+        /* Tab Content Cards */
+        .tab-content {
+            display: none;
+            background: #FFFFFF !important;
+            border-radius: 24px;
+            padding: 22px;
+            box-shadow: var(--shadow-luxury);
+            border: 1px solid var(--border-soft);
         }
-        .filter-btn-group { display: flex; gap: 6px; flex-wrap: wrap; }
-        .filter-btn {
-            background: #F3E5F5; border: 1px solid #CE93D8; color: #6A1B9A; padding: 5px 12px;
-            border-radius: 10px; font-size: 0.78rem; font-weight: 700; cursor: pointer;
-        }
-        .filter-btn.active, .filter-btn:hover { background: var(--primary); color: white; border-color: var(--primary); }
-
-        /* Scrollable Chart Wrapper for Large Date Ranges */
-        .chart-scroll-wrapper {
-            width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch;
-            border-radius: 14px; padding-bottom: 8px; scrollbar-width: thin;
-        }
-        .chart-inner-container { position: relative; height: 280px; min-width: 100%; }
+        .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
 
         /* KPI Cards */
-        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 25px; }
+        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 22px; }
         .kpi-card {
-            background: linear-gradient(135deg, #FFF0F5, #F3E5F5); border-radius: 18px; padding: 16px;
-            text-align: center; border-right: 4px solid var(--primary); box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            background: #FFF0F5 !important; border-radius: 18px; padding: 16px;
+            text-align: center; border-right: 5px solid var(--primary);
         }
-        .kpi-card h3 { margin: 0 0 5px 0; font-size: 0.82rem; color: #880E4F; font-weight: 800; }
-        .kpi-card .val { font-size: 1.55rem; font-weight: 900; color: var(--primary); }
+        .kpi-card h3 { margin: 0 0 4px 0; font-size: 0.85rem; color: #880E4F !important; font-weight: 800; }
+        .kpi-card .val { font-size: 1.5rem; font-weight: 900; color: var(--primary) !important; }
+
+        /* Maze Grid Cards */
+        .maze-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 16px;
+        }
+        .maze-card {
+            background: #FAF5FB !important;
+            border-radius: 18px;
+            padding: 16px;
+            border: 1.5px solid #F3E5F5;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .maze-card-header {
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px dashed #CE93D8; padding-bottom: 8px;
+        }
+        .maze-title { font-weight: 800; color: #880E4F !important; font-size: 0.92rem; }
+        .maze-date { font-size: 0.8rem; font-weight: 800; color: #6A1B9A !important; background: #F3E5F5 !important; padding: 3px 8px; border-radius: 8px; }
+        
+        .maze-inputs { display: flex; gap: 8px; width: 100%; }
+        .maze-input-pair { flex: 1; display: flex; flex-direction: column; gap: 3px; }
+        .maze-input-pair label { font-size: 0.72rem; font-weight: 800; color: #880E4F !important; }
+        .maze-input-pair input {
+            width: 100%; padding: 6px; font-size: 0.85rem; text-align: center;
+            border: 1.5px solid #CE93D8 !important; border-radius: 8px; font-weight: 800; color: #4A148C !important;
+            background: #FFFFFF !important;
+        }
+
+        .maze-pct-section-title { font-size: 0.78rem; font-weight: 800; color: #6A1B9A !important; margin-top: 4px; }
+        .maze-pct-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; width: 100%; }
+        .maze-pct-box { display: flex; flex-direction: column; align-items: center; }
+        .maze-pct-box label { font-size: 0.68rem; font-weight: 800; color: #6A1B9A !important; margin-bottom: 2px; }
+        .maze-pct-box input {
+            width: 100%; padding: 5px 2px; font-size: 0.8rem; text-align: center;
+            border: 1px solid #CE93D8 !important; border-radius: 6px; font-weight: 800; color: #4A148C !important;
+            background: #FFFFFF !important;
+        }
 
         /* Progress Bars */
-        .prog-item { margin-bottom: 16px; }
-        .prog-header { display: flex; justify-content: space-between; font-size: 0.88rem; font-weight: 800; margin-bottom: 5px; }
-        .bar-bg { background: #E1BEE7; height: 14px; border-radius: 8px; overflow: hidden; padding: 2px; }
-        .bar-fill { background: linear-gradient(90deg, #EC407A, #AB47BC, #D4AF37); height: 100%; width: 0%; border-radius: 6px; }
+        .prog-item { margin-bottom: 14px; }
+        .prog-header { display: flex; justify-content: space-between; font-size: 0.88rem; font-weight: 800; margin-bottom: 4px; color: #2D0C27 !important; }
+        .bar-bg { background: #E1BEE7 !important; height: 14px; border-radius: 8px; overflow: hidden; padding: 2px; }
+        .bar-fill { background: linear-gradient(90deg, #EC407A, #AB47BC, #D4AF37) !important; height: 100%; width: 0%; border-radius: 6px; }
 
-        /* Maze Cards Grid */
-        .maze-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 15px; }
-        .maze-card {
-            background: #FAFAFA; border-radius: 18px; padding: 16px; border: 1.5px solid #F3E5F5;
-            display: flex; flex-direction: column; gap: 10px;
-        }
-        .maze-card-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed #E1BEE7; padding-bottom: 8px; }
-        .maze-title { font-weight: 800; color: #880E4F; font-size: 0.92rem; }
-        .maze-date { font-size: 0.8rem; font-weight: 700; color: #7B1FA2; background: #F3E5F5; padding: 3px 8px; border-radius: 8px; }
-        .maze-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-        .maze-pct-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; }
-        .maze-pct-box { display: flex; flex-direction: column; text-align: center; }
-        .maze-pct-box label { font-size: 0.68rem; font-weight: 700; color: #6A1B9A; margin-bottom: 2px; }
-        .maze-pct-box input { padding: 4px; font-size: 0.78rem; text-align: center; border: 1px solid #E1BEE7; border-radius: 6px; font-weight: 700; }
-
-        /* Table */
-        table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-        th, td { padding: 10px 12px; text-align: center; border-bottom: 1px solid #F3E5F5; font-weight: 600; }
-        th { background: #F8BBD0; color: #880E4F; font-weight: 800; border-radius: 6px; }
-        tr:nth-child(even) { background: #FAF5FB; }
-        tr:hover { background: #F3E5F5; }
+        /* Table */  
+        table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+        th, td { padding: 10px 12px; text-align: center; border-bottom: 1px solid #F3E5F5; font-weight: 700; color: #2D0C27 !important; }
+        th { background: #F8BBD0 !important; color: #880E4F !important; font-weight: 800; border-radius: 6px; }
+        tr:nth-child(even) { background: #FAF5FB !important; }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes popIn { from { opacity: 0; transform: scale(0.94); } to { opacity: 1; transform: scale(1); } }
+        @keyframes popIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <!-- Luxury Header -->
+    <!-- Header -->
     <header>
         <div class="header-title">
             <span class="header-flower">🌸</span>
@@ -232,12 +346,10 @@
         <p>بازه زمانی: ۱۸ مهر ۱۴۰۵ تا ۳۰ تیر ۱۴۰۶ (۲۸۵ روز) | هدف‌گذاری روزانه: ۸ ساعت مطالعه فعال</p>
     </header>
 
-    <!-- Live Cloud Sync Status Bar -->
-    <div id="cloudSyncStatus" style="background: linear-gradient(135deg, #E8F5E9, #C8E6C9); color: #1B5E20; padding: 12px 18px; border-radius: 18px; font-weight: 800; font-size: 0.88rem; margin-bottom: 22px; display: flex; align-items: center; justify-content: space-between; border: 1.5px solid #A5D6A7; box-shadow: 0 4px 15px rgba(46, 125, 50, 0.08);">
-        <span id="syncStatusText" style="display:flex; align-items:center; gap:8px;">
-            <span style="font-size:1.1rem;">🟢</span> <span>همگام‌سازی ابری زنده با گوگل‌شیت فعال است</span>
-        </span>
-        <button type="button" onclick="syncFromCloud()" style="background: linear-gradient(45deg, #2E7D32, #388E3C); color: white; border: none; padding: 7px 15px; border-radius: 12px; font-weight: 800; cursor: pointer; font-size: 0.82rem; box-shadow: 0 3px 8px rgba(0,0,0,0.15);">🔄 به‌روزرسانی زنده</button>
+    <!-- Cloud Sync Status Banner -->
+    <div id="cloudSyncStatus" class="sync-banner">
+        <span>🟢 همگام‌سازی ابری زنده با گوگل‌شیت فعال است</span>
+        <button type="button" class="sync-btn" onclick="syncFromCloud()">🔄 به روزرسانی زنده</button>
     </div>
 
     <!-- Motivational Feedback Banner -->
@@ -249,7 +361,7 @@
         <div id="feedbackBody" class="feedback-body"></div>
     </div>
 
-    <!-- STEP 1: Luxury Input Form -->
+    <!-- STEP 1: Form Card -->
     <div class="input-card">
         <div class="card-header">
             <h2>🌸 ثبت مطالعه روزانه نازنین</h2>
@@ -258,7 +370,7 @@
         <form id="studyForm">
             <!-- Date Selection Row -->
             <div class="date-select-box">
-                <label>📅 انتخاب تاریخ:</label>
+                <label>📅 تاریخ:</label>
                 <div class="dropdown-group">
                     <select id="daySelect" class="luxury-select" onchange="onDatePartsChange()"></select>
                     <select id="monthSelect" class="luxury-select" onchange="onDatePartsChange()"></select>
@@ -266,23 +378,25 @@
                 </div>
             </div>
 
-            <!-- 5 Subjects Input Cards -->
+            <!-- 5 Subjects Grid (Side-by-Side Inputs) -->
             <div class="subjects-grid">
                 <!-- Bio -->
                 <div class="subject-card">
                     <div class="subject-title">🧬 زیست‌شناسی</div>
-                    <div class="input-pair">
-                        <label>ساعت مطالعه</label>
-                        <div class="input-wrapper">
-                            <input type="number" id="bioHrs" min="0" max="16" step="0.5" value="3.0">
-                            <span class="unit-tag">ساعت</span>
+                    <div class="subject-inputs-row">
+                        <div class="input-pair">
+                            <label>ساعت مطالعه</label>
+                            <div class="input-wrapper">
+                                <input type="number" id="bioHrs" min="0" max="16" step="0.5" value="3.0">
+                                <span class="unit-tag">ساعت</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="input-pair">
-                        <label>تعداد تست</label>
-                        <div class="input-wrapper">
-                            <input type="number" id="bioTst" min="0" max="500" step="1" value="40">
-                            <span class="unit-tag">تست</span>
+                        <div class="input-pair">
+                            <label>تعداد تست</label>
+                            <div class="input-wrapper">
+                                <input type="number" id="bioTst" min="0" max="500" step="1" value="40">
+                                <span class="unit-tag">تست</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -290,18 +404,20 @@
                 <!-- Chem -->
                 <div class="subject-card">
                     <div class="subject-title">🧪 شیمی</div>
-                    <div class="input-pair">
-                        <label>ساعت مطالعه</label>
-                        <div class="input-wrapper">
-                            <input type="number" id="chemHrs" min="0" max="16" step="0.5" value="2.0">
-                            <span class="unit-tag">ساعت</span>
+                    <div class="subject-inputs-row">
+                        <div class="input-pair">
+                            <label>ساعت مطالعه</label>
+                            <div class="input-wrapper">
+                                <input type="number" id="chemHrs" min="0" max="16" step="0.5" value="2.0">
+                                <span class="unit-tag">ساعت</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="input-pair">
-                        <label>تعداد تست</label>
-                        <div class="input-wrapper">
-                            <input type="number" id="chemTst" min="0" max="500" step="1" value="25">
-                            <span class="unit-tag">تست</span>
+                        <div class="input-pair">
+                            <label>تعداد تست</label>
+                            <div class="input-wrapper">
+                                <input type="number" id="chemTst" min="0" max="500" step="1" value="25">
+                                <span class="unit-tag">تست</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -309,18 +425,20 @@
                 <!-- Phys -->
                 <div class="subject-card">
                     <div class="subject-title">⚛️ فیزیک</div>
-                    <div class="input-pair">
-                        <label>ساعت مطالعه</label>
-                        <div class="input-wrapper">
-                            <input type="number" id="phyHrs" min="0" max="16" step="0.5" value="1.5">
-                            <span class="unit-tag">ساعت</span>
+                    <div class="subject-inputs-row">
+                        <div class="input-pair">
+                            <label>ساعت مطالعه</label>
+                            <div class="input-wrapper">
+                                <input type="number" id="phyHrs" min="0" max="16" step="0.5" value="1.5">
+                                <span class="unit-tag">ساعت</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="input-pair">
-                        <label>تعداد تست</label>
-                        <div class="input-wrapper">
-                            <input type="number" id="phyTst" min="0" max="500" step="1" value="20">
-                            <span class="unit-tag">تست</span>
+                        <div class="input-pair">
+                            <label>تعداد تست</label>
+                            <div class="input-wrapper">
+                                <input type="number" id="phyTst" min="0" max="500" step="1" value="20">
+                                <span class="unit-tag">تست</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -328,18 +446,20 @@
                 <!-- Math -->
                 <div class="subject-card">
                     <div class="subject-title">📐 ریاضیات</div>
-                    <div class="input-pair">
-                        <label>ساعت مطالعه</label>
-                        <div class="input-wrapper">
-                            <input type="number" id="mathHrs" min="0" max="16" step="0.5" value="1.5">
-                            <span class="unit-tag">ساعت</span>
+                    <div class="subject-inputs-row">
+                        <div class="input-pair">
+                            <label>ساعت مطالعه</label>
+                            <div class="input-wrapper">
+                                <input type="number" id="mathHrs" min="0" max="16" step="0.5" value="1.5">
+                                <span class="unit-tag">ساعت</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="input-pair">
-                        <label>تعداد تست</label>
-                        <div class="input-wrapper">
-                            <input type="number" id="mathTst" min="0" max="500" step="1" value="20">
-                            <span class="unit-tag">تست</span>
+                        <div class="input-pair">
+                            <label>تعداد تست</label>
+                            <div class="input-wrapper">
+                                <input type="number" id="mathTst" min="0" max="500" step="1" value="20">
+                                <span class="unit-tag">تست</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -347,18 +467,20 @@
                 <!-- Geo -->
                 <div class="subject-card">
                     <div class="subject-title">🌍 زمین‌شناسی</div>
-                    <div class="input-pair">
-                        <label>ساعت مطالعه</label>
-                        <div class="input-wrapper">
-                            <input type="number" id="geoHrs" min="0" max="16" step="0.5" value="0.0">
-                            <span class="unit-tag">ساعت</span>
+                    <div class="subject-inputs-row">
+                        <div class="input-pair">
+                            <label>ساعت مطالعه</label>
+                            <div class="input-wrapper">
+                                <input type="number" id="geoHrs" min="0" max="16" step="0.5" value="0.0">
+                                <span class="unit-tag">ساعت</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="input-pair">
-                        <label>تعداد تست</label>
-                        <div class="input-wrapper">
-                            <input type="number" id="geoTst" min="0" max="500" step="1" value="0">
-                            <span class="unit-tag">تست</span>
+                        <div class="input-pair">
+                            <label>تعداد تست</label>
+                            <div class="input-wrapper">
+                                <input type="number" id="geoTst" min="0" max="500" step="1" value="0">
+                                <span class="unit-tag">تست</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -376,7 +498,7 @@
         </form>
     </div>
 
-    <!-- STEP 2: Icon Navigation Tabs (Mobile Overflow Fixed) -->
+    <!-- Navigation Tabs -->
     <div class="nav-tabs">
         <button class="tab-btn active" onclick="switchTab('chartsTab', this)">📊 روند و نمودارها</button>
         <button class="tab-btn" onclick="switchTab('targetsTab', this)">🎯 تارگت‌ها و پیشرفت</button>
@@ -385,42 +507,30 @@
         <button class="tab-btn" onclick="switchTab('mazeTab', this)">🧪 آزمون‌های ماز</button>
     </div>
 
-    <!-- TAB 1: CHARTS (With Horizontal Scroll & Filter Buttons) -->
+    <!-- TAB 1: CHARTS -->
     <div id="chartsTab" class="tab-content active">
-        <div class="chart-controls">
-            <h3 style="color:#880E4F; margin:0;">📈 نمودار روند ساعات مطالعه روزانه</h3>
-            <div class="filter-btn-group">
-                <button class="filter-btn" onclick="setChartRange(7, this)">۷ روز اخیر</button>
-                <button class="filter-btn" onclick="setChartRange(14, this)">۱۴ روز اخیر</button>
-                <button class="filter-btn" onclick="setChartRange(30, this)">۳۰ روز اخیر</button>
-                <button class="filter-btn active" onclick="setChartRange('all', this)">کل روزها (اسکرول)</button>
-            </div>
+        <h3 style="color:#880E4F; margin-top:0;">📈 نمودار روند ساعات مطالعه روزانه (هدف ۸ ساعت)</h3>
+        <div style="position:relative; height:280px; margin-bottom:30px;">
+            <canvas id="dailyLineChart"></canvas>
         </div>
 
-        <div class="chart-scroll-wrapper" id="lineChartScrollWrapper">
-            <div id="lineChartContainer" class="chart-inner-container">
-                <canvas id="dailyLineChart"></canvas>
-            </div>
-        </div>
-
-        <!-- 2 SEPARATE BAR CHARTS -->
-        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:22px; margin-top:25px;">
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:20px;">
             <div>
                 <h3 style="color:#880E4F; margin-top:0;">⏱️ مجموع ساعات مطالعه به تفکیک درس</h3>
-                <div style="position:relative; height:230px;">
+                <div style="position:relative; height:240px;">
                     <canvas id="subjectHoursBarChart"></canvas>
                 </div>
             </div>
             <div>
                 <h3 style="color:#880E4F; margin-top:0;">🎯 مجموع تست‌های زده‌شده به تفکیک درس</h3>
-                <div style="position:relative; height:230px;">
+                <div style="position:relative; height:240px;">
                     <canvas id="subjectTestsBarChart"></canvas>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- TAB 2: TARGETS & PROGRESS -->
+    <!-- TAB 2: TARGETS -->
     <div id="targetsTab" class="tab-content">
         <div class="kpi-grid">
             <div class="kpi-card"><h3>کل هدف دوره (۲۸۵ روز)</h3><div class="val" id="totalTargetVal">۲,۲۸۰ ساعت</div></div>
@@ -457,20 +567,18 @@
         </div>
     </div>
 
-    <!-- TAB 4: INSIGHTS & DROP ALERT -->
+    <!-- TAB 4: INSIGHTS -->
     <div id="insightsTab" class="tab-content">
         <h3 style="color:#880E4F; margin-top:0;">💡 تحلیل عملکرد و هوش مطالعاتی نازنین</h3>
         <div id="insightsContent"></div>
     </div>
 
-    <!-- TAB 5: MAZE EXAMS DATABASE -->
+    <!-- TAB 5: MAZE EXAMS -->
     <div id="mazeTab" class="tab-content">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; flex-wrap:wrap; gap:10px;">
-            <h3 style="color:#880E4F; margin:0;">🧪 بانک داده و کارنامه ۱۸ مرحله آزمون ماز (۱۴۰۶-۱۴۰۵)</h3>
-            <span style="font-size:0.85rem; color:#7B1FA2; font-weight:700;">از ۱۷ مهر ۱۴۰۵ تا ۴ تیر ۱۴۰۶</span>
-        </div>
-
-        <div style="position:relative; height:220px; margin-bottom:25px;">
+        <h2 style="color:#880E4F; margin-top:0; border-bottom:2px dashed #F8BBD0; padding-bottom:10px;">🧪 کارنامه آزمون‌های ماز کنکور ۱۴۰۶</h2>
+        <p style="color:#7B1FA2; font-weight:700; margin-bottom:20px;">ثبت رتبه، تراز و درصد هر درس برای ۱۸ مرحله آزمون ماز (از ۱۷ مهر ۱۴۰۵ تا ۴ تیر ۱۴۰۶)</p>
+        
+        <div style="position:relative; height:250px; margin-bottom:30px;">
             <canvas id="mazeTrazChart"></canvas>
         </div>
 
@@ -481,111 +589,18 @@
 <script>
     const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx22xHPMQis_T36YF9lSrfjLDS0AlKPhhmLqLr4OJyyizNQD6EzMv6y2VuSB5ahnCIP/exec";
 
-    function showSyncBadge(msg, icon = "🟢") {
-        const el = document.getElementById("syncStatusText");
-        if (el) el.innerHTML = `<span style="font-size:1.1rem;">${icon}</span> <span>${msg}</span>`;
-    }
-
-    function syncToCloud(lastDate, dayData) {
-        if (!GOOGLE_SCRIPT_URL) return;
-        showSyncBadge("در حال ارسال داده به گوگل‌شیت...", "☁️");
-        
-        const payload = {
-            type: "FULL_SYNC",
-            date: lastDate || "",
-            bioH: dayData ? dayData.bioH : "",
-            bioT: dayData ? dayData.bioT : "",
-            chemH: dayData ? dayData.chemH : "",
-            chemT: dayData ? dayData.chemT : "",
-            phyH: dayData ? dayData.phyH : "",
-            phyT: dayData ? dayData.phyT : "",
-            mathH: dayData ? dayData.mathH : "",
-            mathT: dayData ? dayData.mathT : "",
-            geoH: dayData ? dayData.geoH : "",
-            geoT: dayData ? dayData.geoT : "",
-            notes: dayData ? dayData.notes : "",
-            studyMap: studyMap,
-            mazeData: mazeData,
-            timestamp: new Date().toISOString()
-        };
-
-        fetch(GOOGLE_SCRIPT_URL, {
-            method: "POST",
-            mode: "no-cors",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload)
-        }).then(() => {
-            setTimeout(() => {
-                showSyncBadge("همگام‌سازی ابری زنده با گوگل‌شیت فعال است (ارسال موفق)", "🟢");
-            }, 800);
-        }).catch(err => {
-            console.warn("Sync error:", err);
-            showSyncBadge("ذخیره شده در مرورگر (ارتباط محلی)", "🟢");
-        });
-    }
-
-    function syncFromCloud() {
-        if (!GOOGLE_SCRIPT_URL) return;
-        showSyncBadge("در حال همگام‌سازی و دریافت اطلاعات از گوگل‌شیت...", "🔄");
-        fetch(GOOGLE_SCRIPT_URL)
-            .then(res => res.json())
-            .then(data => {
-                if (Array.isArray(data)) {
-                    data.forEach(row => {
-                        if (!row || row.length === 0) return;
-                        const firstColStr = row[0] ? row[0].toString() : "";
-                        if (firstColStr.startsWith("{") && firstColStr.includes("studyMap")) {
-                            try {
-                                const parsed = JSON.parse(firstColStr);
-                                if (parsed.studyMap) studyMap = Object.assign({}, studyMap, parsed.studyMap);
-                                if (parsed.mazeData) mazeData = Object.assign({}, mazeData, parsed.mazeData);
-                            } catch(e){}
-                        } else if (firstColStr.match(/^\d{4}\/\d{2}\/\d{2}$/)) {
-                            const dateKey = firstColStr;
-                            studyMap[dateKey] = {
-                                date: dateKey,
-                                bioH: parseFloat(row[1])||0, bioT: parseInt(row[2])||0,
-                                chemH: parseFloat(row[3])||0, chemT: parseInt(row[4])||0,
-                                phyH: parseFloat(row[5])||0, phyT: parseInt(row[6])||0,
-                                mathH: parseFloat(row[7])||0, mathT: parseInt(row[8])||0,
-                                geoH: parseFloat(row[9])||0, geoT: parseInt(row[10])||0,
-                                notes: row[11] || ""
-                            };
-                        }
-                    });
-                    localStorage.setItem("nazanin_study_map_v4", JSON.stringify(studyMap));
-                    localStorage.setItem("nazanin_maze_map_v1", JSON.stringify(mazeData));
-                    renderKPIs();
-                    renderProgressBars();
-                    renderTable();
-                    renderCharts();
-                    renderInsights();
-                    renderMazeGrid();
-                    renderMazeChart();
-                    showSyncBadge("همگام‌سازی ابری زنده با گوگل‌شیت فعال است (آپدیت آنلاین)", "🟢");
-                }
-            })
-            .catch(err => {
-                console.warn("Fetch error:", err);
-                showSyncBadge("همگام‌سازی ابری زنده با گوگل‌شیت فعال است", "🟢");
-            });
-    }
-
-    // Convert All Numbers to Persian Digits
     function toPersianDigits(num) {
         if (num === null || num === undefined) return '';
         const persianDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
         return num.toString().replace(/\d/g, x => persianDigits[parseInt(x)]);
     }
 
-    // Format number with Persian digits and commas
     function formatNumFa(num, isFloat = false) {
         if (num === null || num === undefined || isNaN(num)) return toPersianDigits('۰');
         let valStr = isFloat ? num.toFixed(1) : Math.round(num).toString();
         let parts = valStr.split('.');
         parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, "٫");
-        let formatted = parts.join('.');
-        return toPersianDigits(formatted);
+        return toPersianDigits(parts.join('.'));
     }
 
     const MONTHS = [
@@ -596,7 +611,6 @@
 
     const YEARS = [1405, 1406];
 
-    // 18 Maze Exams Schedule
     const MAZE_EXAMS_LIST = [
         { id: 1, title: 'آزمون ۱ ماز', date: '1405/07/17' },
         { id: 2, title: 'آزمون ۲ ماز', date: '1405/08/01' },
@@ -604,42 +618,19 @@
         { id: 4, title: 'آزمون ۴ ماز', date: '1405/08/29' },
         { id: 5, title: 'آزمون ۵ ماز (جمع‌بندی دهم)', date: '1405/09/13' },
         { id: 6, title: 'آزمون ۶ ماز', date: '1405/09/27' },
-        { id: 7, title: 'آزمون ۷ ماز (جمع‌بندی نیم‌سال اول ۱۲)', date: '1405/10/25' },
+        { id: 7, title: 'آزمون ۷ ماز (جمع‌بندی ۱۲)', date: '1405/10/25' },
         { id: 8, title: 'آزمون ۸ ماز', date: '1405/11/09' },
         { id: 9, title: 'آزمون ۹ ماز', date: '1405/11/23' },
         { id: 10, title: 'آزمون ۱۰ ماز', date: '1405/12/07' },
-        { id: 11, title: 'آزمون ۱۱ ماز (جمع‌بندی یازدهم)', date: '1405/12/21' },
-        { id: 12, title: 'آزمون ۱۲ ماز (مرور دهم و یازدهم)', date: '1406/01/06' },
-        { id: 13, title: 'آزمون ۱۳ ماز (مرور نیم‌سال اول ۱۲)', date: '1406/01/20' },
+        { id: 11, title: 'آزمون ۱۱ ماز (جمع‌بندی ۱۱)', date: '1405/12/21' },
+        { id: 12, title: 'آزمون ۱۲ ماز (مرور پایه)', date: '1406/01/06' },
+        { id: 13, title: 'آزمون ۱۳ ماز (مرور ۱۲)', date: '1406/01/20' },
         { id: 14, title: 'آزمون ۱۴ ماز', date: '1406/02/03' },
-        { id: 15, title: 'آزمون ۱۵ ماز (مرور نیم‌سال دوم ۱۲)', date: '1406/02/24' },
+        { id: 15, title: 'آزمون ۱۵ ماز (مرور نیمسال دوم)', date: '1406/02/24' },
         { id: 16, title: 'آزمون ۱۶ ماز (جامع ۱)', date: '1406/03/21' },
         { id: 17, title: 'آزمون ۱۷ ماز (جامع ۲)', date: '1406/03/28' },
         { id: 18, title: 'آزمون ۱۸ ماز (جامع نهایی کنکور)', date: '1406/04/04' }
     ];
-
-    const FEEDBACK_MESSAGES = {
-        below8: [
-            "🌸 نازنین عزیز، امروز {hrs} ساعت مطالعه کردی. یادش باشه این روزها خشت‌های بنای قبولی تو هستند. اگر هنوز از روزت زمانی باقی مانده دست به کار شو، وگرنه فردا با انرژی دوبل جبرانش کن! تو می‌تونی.",
-            "💪 نازنین جان، {hrs} ساعت خوبه اما هدف تو صندلی بهترین دانشگاه‌هاست! هر روز تعیین‌کننده‌ست. فردا پرقدرت‌تر ظاهر شو و نذار زمان از دست بره.",
-            "🌱 امروز {hrs} ساعت ثبت کردی. ناامید نشو، مسیر کنکور یک ماراتن باشکوهه! فردا جبران کن و نشون بده که چقدر به هدفت متعهدی."
-        ],
-        exact8: [
-            "🎉 فوق‌العاده است نازنین! دقیقاً {hrs} ساعت مطالعه کردی و هدف روزانه‌ت کاملاً محقق شد. همین انضباطه که تو رو به هدفت می‌رسونه. آفرین!",
-            "✨ عالی بود! {hrs} ساعت مطالعه منظم و دقیق. قدم‌های تو به سمت هدف بسیار محکم و مطمئنه. بهت افتخار می‌کنیم!",
-            "🌟 آفرین نازنین! رسیدن به هدف {hrs} ساعت نشونه اراده قوی توئه. همین مسیر رو با همین نظم ادامه بده."
-        ],
-        above8: [
-            "🔥 خسته نباشی قهرمان! {hrs} ساعت مطالعه یعنی فراتر از حد انتظار و هدف! این تلاش‌های اضافی دقیقاً همون تفاوت‌های بزرگ رو توی کنکور می‌سازه.",
-            "🚀 بی‌نظیری نازنین! {hrs} ساعت تلاش خستگی‌ناپذیر. تو داری با قدرت به سمت صندلی دانشگاه مورد علاقه‌ت پرواز می‌کنی!",
-            "💎 فوق‌العاده! {hrs} ساعت مطالعه فعال و ارزشمند. این انگیزه و جدیت نشون میده هیچ مانعی نمی‌تونه جلوت رو بگیره."
-        ],
-        above10: [
-            "🏆 شاهکار کردی نازنین! {hrs} ساعت مطالعه در یک روز یعنی ایمان کامل به رویاهات! تو عالی هستی و شک نکن با این همت، به بهترین نتیجه می‌رسی.",
-            "🌟 درخشش مطلق! ثبت {hrs} ساعت مطالعه فوق‌العاده است! انرژی و اراده تو تحسین‌برانگیزه. تو قطعا یکی از رتبه‌برترهای کنکور ۱۴۰۶ خواهی بود!",
-            "👑 فوق‌العاده و استثنایی! {hrs} ساعت تلاش خالصانه! این تلاش شاهانه ارزشمندترین سرمایه توئه. به درخشش ادامه بده نازنین جان!"
-        ]
-    };
 
     const TARGETS = {
         'زیست': { targetHrs: 866, pct: 38 },
@@ -656,7 +647,6 @@
     let mazeData = JSON.parse(localStorage.getItem('nazanin_maze_map_v1')) || {};
 
     let lineChart, barHoursChart, barTestsChart, mazeChart;
-    let currentChartRange = 'all';
 
     function initDateDropdowns() {
         const yearSel = document.getElementById('yearSelect');
@@ -776,39 +766,64 @@
         };
 
         saveAndRender();
-        syncToCloud(dateKey, studyMap[dateKey]);
+        syncToCloud(studyMap[dateKey]);
         triggerMotivationalFeedback(totalDayHrs);
     });
+
+    function syncToCloud(entry) {
+        if (!GOOGLE_SCRIPT_URL) return;
+        fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(entry)
+        }).catch(err => console.log('Cloud sync error:', err));
+    }
+
+    function syncFromCloud() {
+        if (!GOOGLE_SCRIPT_URL) return;
+        fetch(GOOGLE_SCRIPT_URL)
+            .then(res => res.json())
+            .then(data => {
+                if (Array.isArray(data) && data.length > 1) {
+                    for (let i = 1; i < data.length; i++) {
+                        let row = data[i];
+                        if (row && row[0]) {
+                            studyMap[row[0]] = {
+                                date: row[0],
+                                bioH: parseFloat(row[1])||0, bioT: parseInt(row[2])||0,
+                                chemH: parseFloat(row[3])||0, chemT: parseInt(row[4])||0,
+                                phyH: parseFloat(row[5])||0, phyT: parseInt(row[6])||0,
+                                mathH: parseFloat(row[7])||0, mathT: parseInt(row[8])||0,
+                                geoH: parseFloat(row[9])||0, geoT: parseInt(row[10])||0,
+                                notes: row[11] || ''
+                            };
+                        }
+                    }
+                    saveAndRender();
+                }
+            }).catch(err => console.log('Cloud fetch error:', err));
+    }
 
     function triggerMotivationalFeedback(totalHrs) {
         const banner = document.getElementById('feedbackBanner');
         const titleEl = document.getElementById('feedbackTitle');
         const bodyEl = document.getElementById('feedbackBody');
 
-        let pool = [];
-        let titleText = '';
+        let titleText = '🎯 ثبت عملکرد امروز (' + formatNumFa(totalHrs, true) + ' ساعت)';
+        let msg = 'آفرین نازنین جان! ثبت منظم مطالعه مهم‌ترین قدم در مسیر موفقیت است.';
 
         if (totalHrs < 8) {
-            titleText = '🌱 پیام انگیزشی و یادآوری هدفمند (' + formatNumFa(totalHrs, true) + ' ساعت مطالعه)';
-            pool = FEEDBACK_MESSAGES.below8;
-        } else if (totalHrs === 8) {
-            titleText = '🎯 تحقق کامل تارگت روزانه! (' + formatNumFa(totalHrs, true) + ' ساعت مطالعه)';
-            pool = FEEDBACK_MESSAGES.exact8;
-        } else if (totalHrs > 8 && totalHrs <= 10) {
-            titleText = '🔥 تلاش فوق‌العاده فراتر از هدف! (' + formatNumFa(totalHrs, true) + ' ساعت مطالعه)';
-            pool = FEEDBACK_MESSAGES.above8;
-        } else {
-            titleText = '🏆 درخشش استثنایی و شاهکار مطالعه! (' + formatNumFa(totalHrs, true) + ' ساعت مطالعه)';
-            pool = FEEDBACK_MESSAGES.above10;
+            titleText = '🌱 ثبت عملکرد امروز (' + formatNumFa(totalHrs, true) + ' ساعت مطالعه)';
+            msg = 'نازنین عزیز، امروز ' + formatNumFa(totalHrs, true) + ' ساعت مطالعه کردی. فردا پرقدرت‌تر ادامه بده و جبرانش کن!';
+        } else if (totalHrs >= 8) {
+            titleText = '🏆 درخشش فوق‌العاده! (' + formatNumFa(totalHrs, true) + ' ساعت مطالعه)';
+            msg = 'فوق‌العاده است نازنین! هدف روزانه‌ت کاملاً محقق شد. به همین مسیر با اراده ادامه بده!';
         }
 
-        const randMsg = pool[Math.floor(Math.random() * pool.length)].replace('{hrs}', formatNumFa(totalHrs, true));
-
-        titleEl.innerHTML = titleText;
-        bodyEl.innerHTML = randMsg;
-
+        titleEl.innerText = titleText;
+        bodyEl.innerText = msg;
         banner.classList.add('show');
-        banner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
     function hideFeedback() {
@@ -908,33 +923,10 @@
         });
     }
 
-    function setChartRange(range, btn) {
-        currentChartRange = range;
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        if (btn) btn.classList.add('active');
-        renderCharts();
-    }
-
     function renderCharts() {
         let sorted = getSortedEntries();
-        
-        // Filter range
-        let displayList = sorted;
-        if (currentChartRange !== 'all' && typeof currentChartRange === 'number') {
-            displayList = sorted.slice(-currentChartRange);
-        }
-
-        let datesFa = displayList.map(d => toPersianDigits(d.date));
-        let dailyTotals = displayList.map(d => d.bioH + d.chemH + d.phyH + d.mathH + d.geoH);
-
-        // Adjust Container Width for Scrollability when 'all' is selected
-        const container = document.getElementById('lineChartContainer');
-        if (currentChartRange === 'all' && displayList.length > 10) {
-            let calculatedWidth = Math.max(container.parentElement.clientWidth, displayList.length * 42);
-            container.style.width = calculatedWidth + 'px';
-        } else {
-            container.style.width = '100%';
-        }
+        let datesFa = sorted.map(d => toPersianDigits(d.date));
+        let dailyTotals = sorted.map(d => d.bioH + d.chemH + d.phyH + d.mathH + d.geoH);
 
         let subjectHrs = { 'زیست': 0, 'شیمی': 0, 'فیزیک': 0, 'ریاضی': 0, 'زمین': 0 };
         let subjectTests = { 'زیست': 0, 'شیمی': 0, 'فیزیک': 0, 'ریاضی': 0, 'زمین': 0 };
@@ -951,43 +943,35 @@
         if(barHoursChart) barHoursChart.destroy();
         if(barTestsChart) barTestsChart.destroy();
 
-        try {
-            lineChart = new Chart(document.getElementById('dailyLineChart'), {
-                type: 'line',
-                data: {
-                    labels: datesFa,
-                    datasets: [
-                        { label: 'ساعت مطالعه روزانه', data: dailyTotals, borderColor: '#EC407A', backgroundColor: 'rgba(236,64,122,0.12)', fill: true, tension: 0.35, borderWidth: 3 },
-                        { label: 'تارگت روزانه (۸ ساعت)', data: Array(datesFa.length).fill(8), borderColor: '#AB47BC', borderDash: [5, 5], borderWidth: 2, fill: false }
-                    ]
-                },
-                options: { responsive: true, maintainAspectRatio: false }
-            });
+        lineChart = new Chart(document.getElementById('dailyLineChart'), {
+            type: 'line',
+            data: {
+                labels: datesFa,
+                datasets: [
+                    { label: 'ساعت مطالعه روزانه', data: dailyTotals, borderColor: '#EC407A', backgroundColor: 'rgba(236,64,122,0.12)', fill: true, tension: 0.35, borderWidth: 3 },
+                    { label: 'تارگت روزانه (۸ ساعت)', data: Array(datesFa.length).fill(8), borderColor: '#AB47BC', borderDash: [5, 5], borderWidth: 2, fill: false }
+                ]
+            },
+            options: { responsive: true, maintainAspectRatio: false }
+        });
 
-            // Scroll to end of chart wrapper for recent days
-            const wrapper = document.getElementById('lineChartScrollWrapper');
-            if (wrapper) wrapper.scrollLeft = 99999;
+        barHoursChart = new Chart(document.getElementById('subjectHoursBarChart'), {
+            type: 'bar',
+            data: {
+                labels: Object.keys(subjectHrs),
+                datasets: [{ label: 'ساعت مطالعه', data: Object.values(subjectHrs), backgroundColor: ['#EC407A', '#AB47BC', '#7E57C2', '#5C6BC0', '#26A69A'] }]
+            },
+            options: { responsive: true, maintainAspectRatio: false }
+        });
 
-            barHoursChart = new Chart(document.getElementById('subjectHoursBarChart'), {
-                type: 'bar',
-                data: {
-                    labels: Object.keys(subjectHrs),
-                    datasets: [{ label: 'ساعت مطالعه', data: Object.values(subjectHrs), backgroundColor: ['#EC407A', '#AB47BC', '#7E57C2', '#5C6BC0', '#26A69A'] }]
-                },
-                options: { responsive: true, maintainAspectRatio: false }
-            });
-
-            barTestsChart = new Chart(document.getElementById('subjectTestsBarChart'), {
-                type: 'bar',
-                data: {
-                    labels: Object.keys(subjectTests),
-                    datasets: [{ label: 'تعداد تست', data: Object.values(subjectTests), backgroundColor: ['#F48FB1', '#CE93D8', '#B39DDB', '#9FA8DA', '#80CBC4'] }]
-                },
-                options: { responsive: true, maintainAspectRatio: false }
-            });
-        } catch(err) {
-            console.error('Chart error:', err);
-        }
+        barTestsChart = new Chart(document.getElementById('subjectTestsBarChart'), {
+            type: 'bar',
+            data: {
+                labels: Object.keys(subjectTests),
+                datasets: [{ label: 'تعداد تست', data: Object.values(subjectTests), backgroundColor: ['#F48FB1', '#CE93D8', '#B39DDB', '#9FA8DA', '#80CBC4'] }]
+            },
+            options: { responsive: true, maintainAspectRatio: false }
+        });
     }
 
     function renderInsights() {
@@ -1004,7 +988,7 @@
         let speed = totalHrs > 0 ? (totalTests / totalHrs) : 0;
 
         let statusBg = avgHrs >= 8 ? '#E8F5E9' : '#FFEBEE';
-        let statusColor = avgHrs >= 8 ? '#2E7D32' : '#C62828';
+        let statusColor = avgHrs >= 8 ? '#1B5E20' : '#C62828';
         let statusMsg = avgHrs >= 8 ? '🌟 عالی! میانگین مطالعه روزانه نازنین فوق‌العاده و بالای هدف ۸ ساعت است.' : '⚠️ هشدار افت مطالعه: میانگین مطالعه روزانه از هدف ۸ ساعت کمتر است.';
 
         document.getElementById('insightsContent').innerHTML = `
@@ -1017,16 +1001,14 @@
         `;
     }
 
-    // MAZE EXAMS RENDER & INPUT HANDLER
     function renderMazeGrid() {
         const container = document.getElementById('mazeGridContainer');
-        if (!container) return;
+        if(!container) return;
         container.innerHTML = '';
 
         MAZE_EXAMS_LIST.forEach(exam => {
             const exData = mazeData[exam.id] || { traz: '', rank: '', bioP: '', chemP: '', phyP: '', mathP: '', geoP: '' };
-            
-            let card = document.createElement('div');
+            const card = document.createElement('div');
             card.className = 'maze-card';
             card.innerHTML = `
                 <div class="maze-card-header">
@@ -1034,38 +1016,35 @@
                     <span class="maze-date">${toPersianDigits(exam.date)}</span>
                 </div>
                 <div class="maze-inputs">
-                    <div class="input-pair">
+                    <div class="maze-input-pair">
                         <label>تراز کل</label>
-                        <div class="input-wrapper">
-                            <input type="number" value="${exData.traz}" placeholder="مثلا ۷۲۰۰" onchange="updateMazeEntry(${exam.id}, 'traz', this.value)">
-                        </div>
+                        <input type="number" value="${exData.traz}" placeholder="۷۲۰۰" onchange="updateMazeEntry(${exam.id}, 'traz', this.value)">
                     </div>
-                    <div class="input-pair">
+                    <div class="maze-input-pair">
                         <label>رتبه کل</label>
-                        <div class="input-wrapper">
-                            <input type="number" value="${exData.rank}" placeholder="مثلا ۴۵۰" onchange="updateMazeEntry(${exam.id}, 'rank', this.value)">
-                        </div>
+                        <input type="number" value="${exData.rank}" placeholder="۴۵۰" onchange="updateMazeEntry(${exam.id}, 'rank', this.value)">
                     </div>
                 </div>
+                <div class="maze-pct-section-title">📊 درصد دروس آزمون:</div>
                 <div class="maze-pct-grid">
                     <div class="maze-pct-box">
-                        <label>زیست٪</label>
+                        <label>زیست</label>
                         <input type="number" value="${exData.bioP}" placeholder="٪" onchange="updateMazeEntry(${exam.id}, 'bioP', this.value)">
                     </div>
                     <div class="maze-pct-box">
-                        <label>شیمی٪</label>
+                        <label>شیمی</label>
                         <input type="number" value="${exData.chemP}" placeholder="٪" onchange="updateMazeEntry(${exam.id}, 'chemP', this.value)">
                     </div>
                     <div class="maze-pct-box">
-                        <label>فیزیک٪</label>
+                        <label>فیزیک</label>
                         <input type="number" value="${exData.phyP}" placeholder="٪" onchange="updateMazeEntry(${exam.id}, 'phyP', this.value)">
                     </div>
                     <div class="maze-pct-box">
-                        <label>ریاضی٪</label>
+                        <label>ریاضی</label>
                         <input type="number" value="${exData.mathP}" placeholder="٪" onchange="updateMazeEntry(${exam.id}, 'mathP', this.value)">
                     </div>
                     <div class="maze-pct-box">
-                        <label>زمین٪</label>
+                        <label>زمین</label>
                         <input type="number" value="${exData.geoP}" placeholder="٪" onchange="updateMazeEntry(${exam.id}, 'geoP', this.value)">
                     </div>
                 </div>
@@ -1081,10 +1060,12 @@
         mazeData[examId][field] = value;
         localStorage.setItem('nazanin_maze_map_v1', JSON.stringify(mazeData));
         renderMazeChart();
-        syncToCloud();
     }
 
     function renderMazeChart() {
+        const canvas = document.getElementById('mazeTrazChart');
+        if(!canvas) return;
+
         const labels = MAZE_EXAMS_LIST.map(e => e.title.replace('آزمون ', '').replace(' ماز', ''));
         const trazValues = MAZE_EXAMS_LIST.map(e => {
             const entry = mazeData[e.id];
@@ -1094,7 +1075,7 @@
         if (mazeChart) mazeChart.destroy();
 
         try {
-            mazeChart = new Chart(document.getElementById('mazeTrazChart'), {
+            mazeChart = new Chart(canvas, {
                 type: 'line',
                 data: {
                     labels: labels,
@@ -1102,7 +1083,7 @@
                         label: 'تراز آزمون ماز',
                         data: trazValues,
                         borderColor: '#8E24AA',
-                        backgroundColor: 'rgba(142,36,170,0.12)',
+                        backgroundColor: 'rgba(142, 36, 170, 0.12)',
                         fill: true,
                         tension: 0.3,
                         borderWidth: 3,
@@ -1112,9 +1093,7 @@
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    scales: {
-                        y: { beginAtZero: false, suggestMin: 4000, suggestMax: 10000 }
-                    }
+                    plugins: { legend: { display: true } }
                 }
             });
         } catch(err) {
